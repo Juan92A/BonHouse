@@ -10,7 +10,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <b>PupuSA</b> 
+            <b>BonHouse</b> 
         </x-slot>
 
         <x-validation-errors class="mb-4" />

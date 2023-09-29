@@ -6,11 +6,11 @@
     <footer class="pie-pagina">
         <div class="grupo-1">
             <div class="box">
-                <a class="lfooter" >PupuSA</a>
+                <a class="lfooter" >BonHouse</a>
             </div>
             <div class="box">
                 <h2>SOBRE NOSOTROS</h2>
-                <p>¿Quieres conocer más sobre PupuSA?</p>
+                <p>¿Quieres conocer más sobre BonHouse?</p>
                 <a class="nav-about" style="color: white" >Nosotros</a>
 
             </div>
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="grupo-2">
-            <small>&copy; 2023 <b>PupuSA</b> - Todos los Derechos Reservados: Astrosoftware.</small>
+            <small>&copy; 2023 <b>BonHouse</b> - Todos los Derechos Reservados: Cod-X.</small>
         </div>
     </footer>
 </body>

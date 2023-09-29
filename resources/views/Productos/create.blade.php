@@ -34,15 +34,35 @@
               
         </div>
 
-        <div class="form-group row mb-3">
+           <div class="form-group row mb-3">
             <label for="image_url" class="col-sm-3 col-form-label"><i class="fas fa-image"></i> Subir imagen:</label>
-            <div class="col-sm-9">
+            <div class="col">
                 <input type="file" class="form-control" id="image_url" name="image_url" accept="image/*" required>
+             
+            </div>
+            <div class="col row">
+                <label for="">Imagen seleccionada</label>
+                <img id="image_preview"  src="#" alt="Preview" style="display: none; max-width: 25%; height: auto;">
             </div>
         </div>
-
         <input type="hidden" name="estado" value="1">
         <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-plus-circle"></i> Agregar producto</button>
     </form>
 </div>
+<script>
+    const imageInput = document.getElementById('image_url');
+    const imagePreview = document.getElementById('image_preview');
+
+    imageInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+            imagePreview.src = event.target.result;
+            imagePreview.style.display = 'block';
+        };
+
+        reader.readAsDataURL(file);
+    });
+</script>
 @endsection
