@@ -1,7 +1,100 @@
+
+<style>
+    /* Estilo para el fondo y fuente de la barra de navegación */
+    .navbar-fixed {
+        background-color: #8B4513; /* Color marrón para el fondo */
+    }
+
+    .navbar-brand {
+        font-family: 'Cursive', cursive; /* Fuente estilo vintage */
+        font-size: 24px; /* Tamaño de fuente */
+        color: #FFF; /* Color de fuente blanco */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+    }
+
+    /* Estilo para los botones del menú */
+    .navbar-toggler-icon,
+    .navbar-toggler-icon:focus {
+        background-color: #FFF; /* Color de fondo del botón hamburguesa */
+    }
+
+    .navbar-toggler,
+    .navbar-toggler:focus,
+    .navbar-toggler:hover {
+        border: 2px solid #FFF; /* Borde blanco al pasar el mouse sobre el botón */
+        color: #FFF; /* Color de fuente blanco */
+    }
+
+    /* Estilo para los enlaces del menú */
+    .navbar-nav .nav-link {
+        font-family: 'Cursive', cursive; /* Fuente estilo vintage */
+        font-size: 20px; /* Tamaño de fuente */
+        color: #FFF; /* Color de fuente blanco */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #FFD700; /* Color dorado al pasar el mouse sobre los enlaces */
+    }
+
+    /* Estilo para el botón de carrito */
+    .carrito-btn {
+        font-size: 24px; /* Tamaño de fuente */
+        color: #FFF; /* Color de fuente blanco */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+    }
+
+    .carrito-btn:hover {
+        color: #FFD700; /* Color dorado al pasar el mouse sobre el botón de carrito */
+    }
+
+    /* Estilo para el botón de registro y login */
+    .registrar-btn {
+        font-family: 'Cursive', cursive; /* Fuente estilo vintage */
+        font-size: 18px; /* Tamaño de fuente */
+        color: #FFF; /* Color de fuente blanco */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
+        border: 2px solid #FFF; /* Borde blanco */
+    }
+
+    .registrar-btn:hover {
+        background-color: #FFF; /* Fondo blanco al pasar el mouse sobre el botón */
+        color: #8B4513; /* Color marrón para el texto al pasar el mouse */
+    }
+
+    /* Estilo para la imagen del logo */
+.img-logo {
+    width: 49px; /* Ancho deseado del logo */
+    height: auto; /* Mantener la proporción de aspecto */
+    border-radius: 50%; /* Redondear los bordes al 50% para hacerlo circular */
+    display: block; /* Centrar la imagen horizontalmente */
+    margin: 0 auto; /* Centrar la imagen horizontalmente */
+    border: 2px solid #8B4513; /* Añadir un borde con color marrón */
+    padding: 2px; /* Espacio entre el borde y la imagen */
+    
+
+}
+
+/* Estilo para los enlaces del menú cuando se posiciona el cursor sobre ellos (hover) */
+.navbar-nav .nav-link:hover {
+    color: #8B4513; /* Cambia el color del texto al color marrón al pasar el mouse */
+    background-color: rgb(252, 227, 182); /* Cambia el color de fondo a un tono de amarillo claro al pasar el mouse */
+    border-radius: 10px; /* Redondea los bordes */
+    transition: color 0.3s, background-color 0.3s; /* Agrega una transición suave */
+}
+
+
+</style>
+
+
+
+
+
 <nav class="navbar navbar-expand-lg bg-light navbar-fixed">
 
-    <div class="container">
-        <a class="navbar-brand" href="/">BonHouse</a>
+    <div class="container p-0">
+        <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse">
+        <a class="navbar-brand m-1" href="/" >BonHouse</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,15 +114,29 @@
                      <a class="nav-link" href="/">Inicio</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="/productos">Comida</a>
+                     <a class="nav-link" href="/productos">Productos</a>
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="/nosotros">Nosotros</a>
-                 </li>
-
                  <li>
                      <a class="nav-link" href="/promociones">Promociones</a>
-                 </li>    
+                 </li>
+                 <li>
+                    <a class="nav-link" href="{{ route('home.carrito') }}">
+                        <i class="fa-solid fa-cart-shopping"></i> Crear Eventos
+                        @if(session()->has('carrito'))
+                            <span class="badge bg-danger">{{ count(session('carrito')) }}</span>
+                        @endif
+                    </a>
+                </li>    
+
+                <li >
+                    <a class="nav-link " href="#"  role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
+                        <i class="fas fa-clipboard-list"></i> Atender Eventos
+                    </a>
+                    
+                    
+                </li> 
+
 
              </ul>
              <ul class="navbar-nav ms-auto">
@@ -86,14 +193,7 @@
                             </ul>
                         </div>
 
-                        <li>
-                            <a class="nav-link" href="{{ route('home.carrito') }}">
-                                <i class="fa-solid fa-cart-shopping"></i> Carrito
-                                @if(session()->has('carrito'))
-                                    <span class="badge bg-danger">{{ count(session('carrito')) }}</span>
-                                @endif
-                            </a>
-                        </li>
+                        
                         
 
                         @else

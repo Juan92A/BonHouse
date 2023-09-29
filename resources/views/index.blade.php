@@ -47,6 +47,26 @@
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.titulo-promociones {
+        font-size: 76px; /* Tamaño de fuente más grande */
+        font-family: 'Cursive', cursive; /* Cambia la fuente a un estilo más vintage */
+        color: #8B4513; /* Color marrón para un aspecto vintage */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para un efecto más interesante */
+}
+
+.img-logo {
+    width: 79px; /* Ancho deseado del logo */
+    height: auto; /* Mantener la proporción de aspecto */
+    border-radius: 50%; /* Redondear los bordes al 50% para hacerlo circular */
+    display: block; /* Centrar la imagen horizontalmente */
+    margin: 0 auto; /* Centrar la imagen horizontalmente */
+    border: 2px solid #8B4513; /* Añadir un borde con color marrón */
+    padding: 5px; /* Espacio entre el borde y la imagen */
+    
+
+}
+
 </style>
 
 <!-- INSERTAR CONTENIDO -->
@@ -54,111 +74,83 @@
 <body>
     @include('layouts.header')
 
-
-
-
-    <div class="container mt-5">
-    @if (Route::has('login'))  
-     @auth
-        <h1 class="titulo-promociones mb-4">Bienvenido {{ auth()->user()->name }}  a BonHouse</h1>
-        @else
-        <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
-        @endauth
-     @endif
-        <!-- <div class="row">
-            <div class="col-md-6 col-lg-4 text-center mb-4">
-                <img src="{{ asset('img/pu1.jpg') }}" class="rounded img-fluid" data-aos="zoom-in" alt="...">
-            </div>
-            <div class="col-md-6 col-lg-4 text-center mb-4">
-                <img src="{{ asset('img/pu2.jpg') }}" class="rounded img-fluid" data-aos="zoom-in" alt="...">
-            </div>
-            <div class="col-md-6 col-lg-4 text-center mb-4">
-                <img src="{{ asset('img/pu1.jpg') }}" class="rounded img-fluid" data-aos="zoom-in" alt="...">
-            </div>
-        </div> -->
-
-    </div>
-
-
-<!-- 
-
-    <div class="container">
-        <h1 class="titulo-promociones  mb-5">El secreto son nuestros ingredientes</h1>
-        <div class="row">
-            <div class="col-sm-6 col-md-3" data-aos="fade-up">
-                <div class="card">
-                    <img src="{{ asset('img/c1.jpg') }}" class="card-img-top" alt="Imagen 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Queso</h5>
-                        <p class="card-text">Usamos el mejor queso para hacer pupusas</p>
+    {{-- Carrusel --}}
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('imgC/cafe3.jpg') }}" class="d-block h-100 w-100" alt="...">
+                <div class="carousel-caption d-flex justify-content-center align-items-center">
+                    <div style="margin-bottom: 185px">
+                        <div class="container mt-5">
+                            @if (Route::has('login'))  
+                                    @auth
+                                        <h1 class="titulo-promociones mb-4">Bienvenido {{ auth()->user()->name }}  a BonHouse</h1>
+                                        <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
+                                        @else
+                                        <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
+                                        <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
+                                        @endauth
+                                    @endif
+                        </div> 
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3" data-aos="fade-up">
-                <div class="card">
-                    <img src="{{ asset('img/c2.jpg') }}" class="card-img-top" alt="Imagen 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Frijoles</h5>
-                        <p class="card-text">Se preparan con frijoles de calidad</p>
+            <div class="carousel-item">
+                <img src="{{ asset('imgC/cafe2.jpg') }}" class="d-block h-100 w-100" alt="...">
+                <div class="carousel-caption d-flex justify-content-center align-items-center">
+                    <div style="margin-bottom: 185px">
+                        <div class="container mt-5">
+                            @if (Route::has('login'))  
+                                @auth
+                                    <h1 class="titulo-promociones mb-4">Bienvenido {{ auth()->user()->name }}  a BonHouse</h1>
+                                    <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
+                                    @else
+                                    <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
+                                    <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
+                                    @endauth
+                                @endif
+                        </div> 
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3" data-aos="fade-up">
-                <div class="card">
-                    <img src="{{ asset('img/c3.jpg') }}" class="card-img-top" alt="Imagen 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Chile</h5>
-                        <p class="card-text">No puede faltar el buen chile para la salsita</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3" data-aos="fade-up">
-                <div class="card">
-                    <img src="{{ asset('img/c4.jpg') }}" class="card-img-top" alt="Imagen 4">
-                    <div class="card-body">
-                        <h5 class="card-title">Maiz</h5>
-                        <p class="card-text">Se usa maiz de calidad para tener una masa suave</p>
+            <div class="carousel-item">
+                <img src="{{ asset('imgC/cafe1.jpg') }}" class="d-block h-100 w-100" alt="...">
+                <div class="carousel-caption d-flex justify-content-center align-items-center">
+                    <div style="margin-bottom: 185px">
+                        <div class="container mt-5">
+                            @if (Route::has('login'))  
+                                @auth
+                                    <h1 class="titulo-promociones mb-4">Bienvenido {{ auth()->user()->name }}  a BonHouse</h1>
+                                    <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
+                                    @else
+                                    <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
+                                    <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
+                                @endauth
+                            @endif
+                        </div> 
                     </div>
                 </div>
             </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
+    
 
 
 
-
-    <div class="container">
-        <h1 class="titulo-promociones mb-4">Aqui Encontrarás</h1>
-        <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="image-container">
-                    <p>Pupusas</p>
-                    <img src="{{ asset('img/pu3.jpg') }}" alt="Imagen 1" class="img-fluid">
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="image-container">
-                    <p>Refrescos</p>
-                    <img src="{{ asset('img/ref1.jpg') }}" alt="Imagen 2" class="img-fluid">
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="image-container">
-                    <p>Promociones</p>
-                    <img src="{{ asset('img/prom1.jpg') }}" alt="Imagen 3" class="img-fluid">
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="image-container">
-                    <p>Postres</p>
-                    <img src="{{ asset('img/postre1.jpg') }}" alt="Imagen 4" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </div>
-
- -->
-
+   
     @include('layouts.footer')
 </body>
 
