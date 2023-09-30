@@ -52,12 +52,12 @@
 
         </div>
         <div class="flex-fill col-md-6 mt-4 ">
-            <h2>Ingrese la dirección de envío</h2>
+            <h2>Nombre para la orden:</h2>
             <div class="mb-3">
-                <label for="direccion_envio" class="form-label">Dirección de envío:</label>
-                <input type="text" class="form-control" name="direccion_envio" id="direccion_envio" required>
+                <label for="nombre_cliente" class="form-label">Nombre cliente:</label>
+                <input type="text" class="form-control" name="nombre_cliente" id="nombre_cliente" required>
             </div>
-            <button class="btn btn-success" type="submit" require>Procesar pago en efectivo</button>
+            <button class="btn btn-success" type="submit" require>Procesar Pedido</button>
             <input type="hidden" name="id_estado_pedido" value="1">
         </div>
     </form>

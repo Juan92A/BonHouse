@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <h3>Lugar de envío: {{ $pedidos->ubicacion }}</h3>
+            <h3>Lugar de envío: {{ $pedidos->nombre_cliente }}</h3>
         </div>
     </div>
     <div class="row">

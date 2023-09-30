@@ -16,7 +16,7 @@ class Pedido extends Model
         'fecha_pedido',
         'id_estado_pedido',
         'id_usuario',
-        'ubicacion',
+        'nombre_cliente',
     ]; // Campos que se pueden asignar masivamente
 
     // Métodos para interactuar con la base de datos
@@ -29,7 +29,7 @@ class Pedido extends Model
                 'fecha_pedido' => $this->fecha_pedido,
                 'id_estado_pedido' => $this->id_estado_pedido,
                 'id_usuario' => $this->id_usuario,
-                'ubicacion' => $this->ubicacion,
+                'nombre_cliente' => $this->nombre_cliente,
             ]);
 
             $pedido->save();

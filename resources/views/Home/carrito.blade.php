@@ -2,19 +2,21 @@
 
 @section('content')
 <div class="container mt-3">
-    @if (empty($carrito))
+    {{-- @if (empty($carrito))
         <div class="alert alert-warning" role="alert">
             El carrito está vacío.
         </div>
-    @else
+    @else --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Tabla del carrito de compras -->
-                        <h1 class="text-center" style="color: #c43f3f;">Carrito de compras</h1>
+                        <h1 class="text-center" style="color: #c43f3f;">Ventas a Realizar</h1>
                         <div class="table-responsive container pt-2">
                             <!-- Código de la tabla del carrito -->
+                                <a class="btn btn-primary mb-2" href="/productos">Agregar Venta</a>
+                         
                             <table class="table table-hover table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
@@ -63,37 +65,20 @@
                     </div>
                 </div>
                 <div class="row align-items-center">
-                    <h2 class="text-center" style="color: #c43f3f;">Opciones de pago</h2>
-                    <!-- Formulario de opciones de pago -->
-                    <div class="col-md-12 mt-2 d-flex justify-content-center">
-                        <div class="card w-50">
-                            <div class="card-body">
-                                <form action="{{ route('pago.pagar') }}" method="POST">
-                                    @csrf
-                                    <div class="d-flex justify-content-center align-items-center flex-column">
-                                        <div class="my-3">
-                                            <input type="radio" name="pago" value="tarjeta" id="pago-tarjeta" class="mr-2">
-                                            <label for="pago-tarjeta" class="font-weight-bold">
-                                                <i class="far fa-credit-card fa-lg"></i> Tarjeta de crédito
-                                            </label>
-                                        </div>
-                                        <div class="my-3">
-                                            <input type="radio" name="pago" value="efectivo" id="pago-efectivo" class="mr-2" checked>
-                                            <label for="pago-efectivo" class="font-weight-bold">
-                                                <i class="fas fa-money-bill-wave fa-lg"></i> Efectivo
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="text-center mt-4">
-                                        <button class="btn btn-success" type="submit">Comprar</button>
-                                    </div>
-                                </form>
+                    <form action="{{ route('pago.pagar') }}" method="POST">
+                            @csrf
+                            <div class="d-flex justify-content-center align-items-center flex-column">
+                                <div class="my-3">
+                                    <input type="radio" name="pago" value="efectivo" id="pago-efectivo" class="mr-2" checked hidden>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-success" type="submit">Continuar Pedido</button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>
-    @endif
+    {{-- @endif --}}
 </div>
 @endsection

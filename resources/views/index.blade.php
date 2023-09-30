@@ -83,9 +83,9 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ asset('imgC/cafe3.jpg') }}" class="d-block h-100 w-100" alt="...">
+                <img src="{{ asset('imgC/cafe2.jpg') }}" class="d-block h-100 w-100" alt="...">
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
-                    <div style="margin-bottom: 185px">
+                    <div style="margin-bottom: 25%">
                         <div class="container mt-5">
                             @if (Route::has('login'))  
                                     @auth
@@ -101,9 +101,9 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('imgC/cafe2.jpg') }}" class="d-block h-100 w-100" alt="...">
+                <img src="{{ asset('imgC/cafe1.jpg') }}" class="d-block h-100 w-100" alt="...">
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
-                    <div style="margin-bottom: 185px">
+                    <div style="margin-bottom: 25%">
                         <div class="container mt-5">
                             @if (Route::has('login'))  
                                 @auth
@@ -119,9 +119,9 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('imgC/cafe1.jpg') }}" class="d-block h-100 w-100" alt="...">
+                <img src="{{ asset('imgC/cafe3.jpg') }}" class="d-block h-100 w-100" alt="...">
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
-                    <div style="margin-bottom: 185px">
+                    <div style="margin-bottom: 25%">
                         <div class="container mt-5">
                             @if (Route::has('login'))  
                                 @auth

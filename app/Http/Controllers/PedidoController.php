@@ -24,7 +24,7 @@ namespace App\Http\Controllers;
             $pedido->fecha_pedido = now();
             $pedido->id_usuario = auth()->user()->id;
             $pedido->id_estado_pedido = $request->input('id_estado_pedido');
-            $pedido->ubicacion = $request->input('direccion_envio');
+            $pedido->nombre_cliente = $request->input('nombre_cliente');
             $pedido->save();
 
             // Crear los detalles de pedido para cada producto en el carrito

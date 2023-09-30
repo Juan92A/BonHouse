@@ -116,26 +116,59 @@
                  <li class="nav-item">
                      <a class="nav-link" href="/productos">Productos</a>
                  </li>
-                 <li>
-                     <a class="nav-link" href="/promociones">Promociones</a>
-                 </li>
-                 <li>
-                    <a class="nav-link" href="{{ route('home.carrito') }}">
-                        <i class="fa-solid fa-cart-shopping"></i> Crear Eventos
-                        @if(session()->has('carrito'))
-                            <span class="badge bg-danger">{{ count(session('carrito')) }}</span>
-                        @endif
-                    </a>
-                </li>    
 
-                <li >
-                    <a class="nav-link " href="#"  role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
-                        <i class="fas fa-clipboard-list"></i> Atender Eventos
-                    </a>
-                    
-                    
-                </li> 
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pedidos</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link" href="{{ route('home.carrito') }}">
+                                <i class="fa-solid fa-cart-shopping"></i> Pedidos en Evento
+                                @if(session()->has('carrito'))
+                                    <span class="badge bg-danger">{{ count(session('carrito')) }}</span>
+                                @endif
+                            </a>
+                        </li>    
+
+
+                        <li >
+                            {{-- <a class="nav-link " href="#"  role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
+                                <i class="fas fa-clipboard-list"></i> Atender Eventos
+                            </a> --}}
+        
+                            <a class="nav-link" href="#"  role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
+                                        <i class="fas fa-clipboard-list"></i> Atender Pedidos
+                                    </a>
+                                    
+                                    <form id="pedido-form" action="{{ route('admin.pedidos') }}" method="POST" style="display: none;">
+                                        @csrf
+                                        <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido">
+                                        <select id="id_estado" name="id_estado" class="form-control">
+                                            <option value="">Todos</option>
+                                            <option value="1">En proceso</option>
+                                            <option value="2">Finalizado</option>
+                                            <option value="3">Cancelado</option>
+                                        </select>
+                                    </form>
+                            
+                            
+                        </li> 
+                    </ul>
+                  </li>
+
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Eventos</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="nav-link" href="#"><i class="fas fa-calendar-plus"></i> Crear eventos</a></li>
+                        <li><a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Visualizar eventos</a></li>
+                    </ul>
+                  </li>
+
+                 
+
+               
 
 
              </ul>
