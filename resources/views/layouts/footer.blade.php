@@ -19,8 +19,7 @@
                 <div class="red-social">
                     <a href="https://www.facebook.com/p/Cinabon-House-100062943146098/?paipv=0&eav=AfYmKyGxgMuPooqriQF3AfXNjwbiHQDNgNl1nbxIy2xx3-PEqLk25NdpmCcPvieNjqo&_rdr" class="fa-brands fa-facebook"></a>
                     <a href="https://www.instagram.com/bonhousesv/" class="fa-brands fa-instagram"></a>
-                    <a href="#" class="fa-brands fa-square-twitter"></a>
-                    <a href="#" class="fa-brands fa-square-youtube"></a>
+
                 </div>
             </div>
         </div>

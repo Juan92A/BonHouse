@@ -9,7 +9,7 @@
 .pie-pagina{
     width: 100%;
     margin-top: 10px;
-    background-color: #000000;
+    background-color:#3b220e;
 }
 .pie-pagina .grupo-1{
     width: 100%;
@@ -47,7 +47,7 @@
     line-height: 45px;
     color: #fff;
     margin-right: 10px;
-    background-color: #061d29;
+    background-color: #7e694e;
     text-align: center;
     transition: all 300ms ease;
 }
@@ -55,10 +55,10 @@
     color: aqua;
 }
 .pie-pagina .grupo-2{
-    background-color: #061d29;
+    background-color: #ffd39b;
     padding: 12px 10px;
     text-align: center;
-    color: #fff;
+    color: #080808;
 }
 .pie-pagina .grupo-2 small{
     font-size: 15px;
@@ -76,5 +76,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
-  font-size: 4.2rem;
+  font-family: 'Cursive', cursive; /* Fuente estilo vintage */
+  font-size: 74px; /* Tamaño de fuente */
+  color: #FFF; /* Color de fuente blanco */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
 }
+
