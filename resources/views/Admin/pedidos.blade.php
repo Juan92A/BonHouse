@@ -42,19 +42,33 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $totalfinal = 0; // Inicializa la variable $totalfinal a 0
+                @endphp
                 @foreach ($pedidos as $pedido)
                 <tr>
                     <td>{{ $pedido->id_pedido }}</td>
                     <td>{{ $pedido->total_pagar }}</td>
                     <td>{{ $pedido->fecha_pedido }}</td>
+
+                     {{-- Sumar el total_pagar al totalfinal --}}
+
+                     
+                        
                     <td>
                     @if($pedido->Estado === 'Cancelado')
-                    <p class="text-danger">
+                        <p class="text-danger">{{ $pedido->Estado }}</p>
+                    @elseif($pedido->Estado === 'Pagado')
+                        <p class="text-success">{{ $pedido->Estado }}</p>
                     @else
-                    <p>
+                        <p>{{ $pedido->Estado }}</p>
                     @endif
-                    {{ $pedido->Estado }} <p/>
-                    
+
+                    @if($pedido->Estado === 'Pagado')
+                        @php    
+                            $totalfinal += $pedido->total_pagar;
+                        @endphp
+                    @endif
                     </td>
                     <td>
                         <form method="post" action="{{ route('detalle.pedido') }}">
@@ -72,7 +86,7 @@
                                     <label for="id_estado2">Estado:</label>
                                     <select id="id_estado2" name="id_estado2" class="form-control">
                                         <option value="1">En proceso</option>
-                                        <option value="2">Finalizado</option>
+                                        <option value="2">Pagado</option>
                                         <option value="3">Cancelado</option>
                                     </select>
                                 </div>
@@ -85,7 +99,17 @@
                     </td>
                 </tr>
                 @endforeach
+               
+                <tr>
+                    <td>Total</td>
+                    <td>{{ $totalfinal }}</td>
+                </tr>
             </tbody>
+            
+
+               
+          
+
         </table>
     </div>
 </div>
