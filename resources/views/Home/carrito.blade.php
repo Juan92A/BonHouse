@@ -15,7 +15,7 @@
                         <h1 class="text-center" style="color: #c43f3f;">Ventas a Realizar</h1>
                         <div class="table-responsive container pt-2">
                             <!-- Código de la tabla del carrito -->
-                                <a class="btn btn-primary mb-2" href="/productos">Agregar Venta</a>
+                                <a class="btn btn-primary mb-2" href="/VerCategorias">Agregar Venta</a>
                          
                             <table class="table table-hover table-bordered">
                                 <thead class="thead-dark">

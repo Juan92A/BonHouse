@@ -64,6 +64,10 @@ Route::view('/nosotros', 'home.nosotros')->name('nosotros');
 Route::get('/productos', [FoodController::class, 'index'])->name('food.index');
 
 
+//esta es la nueva
+Route::get('/VerCategorias', [FoodController::class, 'VerCategorias'])->name('food.categorias');
+
+
 Route::get('/promociones', [HomeController::class, 'promociones'])->name('home.promociones');
 
 

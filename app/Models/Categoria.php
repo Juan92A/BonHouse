@@ -13,16 +13,17 @@ class Categoria extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'descripcion', 'estado'
+        'descripcion', 'estado', "imagen_cat"
     ];
 
     // Método para agregar una nueva categoría
-    public static function agregarCategoria($descripcion, $estado)
+    public static function agregarCategoria($descripcion, $estado, $imagen_cat)
     {
         try {
             Categoria::create([
                 'descripcion' => $descripcion,
                 'estado' => $estado,
+                'imagen_cat' => $imagen_cat
             ]);
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -62,7 +63,7 @@ class Categoria extends Model
     {
         try {
             $categorias = DB::table('categorias')
-                ->select('id_categoria', 'estado', 'descripcion')
+                ->select('id_categoria', 'estado', 'descripcion', 'imagen_cat')
                 ->get();
 
             return $categorias;

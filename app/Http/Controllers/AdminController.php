@@ -55,12 +55,38 @@ namespace App\Http\Controllers;
 
         public function agregarCategoria(Request $request)
             {
+
                 
                 if ($request->isMethod('post')) {
+                   
+                    $file = $request->file('image_url');           
+
+                    if($file){
+                       
+                        // Verificar que el archivo sea una imagen con una extensión válida
+                        $allowed_exts = ['jpg', 'jpeg', 'png', 'gif'];
+                        $file_ext = strtolower($file->getClientOriginalExtension());
+                    
+                        if (!in_array($file_ext, $allowed_exts)) {
+                            return "Error: El archivo no es una imagen válida.";
+                        }
+                    
+                        // Guardar el archivo en el almacenamiento de Laravel (public/storage/uploads)
+                        $new_file_name = uniqid('', true) . '.' . $file_ext;
+                        $file->storeAs('public/uploads', $new_file_name);
+                    
+                        // Obtener la URL completa de la imagen
+                        $image_url = Storage::url('uploads/' . $new_file_name);
+
+                    }else{
+                        dd("No hay imagen");
+                    }
+
                     $descripcion = $request->input('descripcion');
-                    $estado = $request->input('estado');                     
-                    Categoria::agregarCategoria($descripcion, $estado);                
-                    return redirect()->route('categorias.editar');
+                    $estado = $request->input('estado');                    
+                    Categoria::agregarCategoria($descripcion, $estado, $image_url);     
+
+                        return redirect()->route('categorias.editar');
                 }
                
             }

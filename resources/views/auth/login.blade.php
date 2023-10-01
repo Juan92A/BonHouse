@@ -1,14 +1,17 @@
 <style>
     b{
         background-image: linear-gradient(to right, #F2921D, #A61F69);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
-  font-size: 5rem;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        font-family: 'Cursive', cursive; /* Fuente estilo vintage */
+        font-size: 74px; /* Tamaño de fuente */
+        color: #FFF; /* Color de fuente blanco */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto */
     }
 </style>
-<x-guest-layout>
-    <x-authentication-card>
+<x-guest-layout >
+    <x-authentication-card >
         <x-slot name="logo">
             <b>BonHouse</b> 
         </x-slot>
@@ -21,9 +24,9 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" >
             @csrf
-
+ 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
