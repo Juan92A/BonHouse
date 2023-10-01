@@ -63,6 +63,9 @@ Route::view('/nosotros', 'home.nosotros')->name('nosotros');
 
 Route::get('/productos', [FoodController::class, 'index'])->name('food.index');
 
+Route::get('/productos/eventos', [FoodController::class, 'indexEvento'])->name('food.evento');
+
+
 
 //esta es la nueva
 Route::get('/VerCategorias', [FoodController::class, 'VerCategorias'])->name('food.categorias');
@@ -75,7 +78,7 @@ Route::post('/carrito/agregar', [CarritoController::class, 'agregar'])->name('ca
 
 
 Route::get('/carrito', [CarritoController::class, 'VerCarrito'])->name('home.carrito');
-
+    
 Route::post('/carrito/agregar-producto', [CarritoController::class, 'agregarProducto'])->name('carrito.agregarProducto');
 
 
@@ -153,3 +156,9 @@ Route::get('/usuario/editperfil', [AdminController::class, 'perfilE'])->name('us
 Route::post('/usuario/Editperfil', [AdminController::class, 'actualizarPerfil'])->name('usuario.actualizarPerfil');
 
 Route::get('promociones/add', [AdminController::class, 'PromocionesAdd'])->name('promociones.create');
+
+
+//*****************evento
+
+
+Route::get('/eventos', [EventoController::class, 'verEvento'])->name('evento.carrito');

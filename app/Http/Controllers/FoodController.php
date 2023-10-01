@@ -11,7 +11,7 @@ class FoodController extends Controller
 {
     public function index(Request $request)
     {
-        $idCategoria = $request->input('cats');
+        $idCategoria = $request->input('categoria');
 
         
 
@@ -20,14 +20,38 @@ class FoodController extends Controller
         } else {
             $productos = Producto::listarProductosByIdCategoria($idCategoria);
         }
-
+        $tipoVenta = 0;
         $categorias = Categoria::listarCategorias();
 
         $data = [
             'productos' => $productos,
-            'categorias' => $categorias
+            'categorias' => $categorias,
+            'tipoventa' => $tipoVenta
         ];
 
+        session(['productovista' => 'normal']);
+
+        return view('food.index', $data);
+    }
+
+
+    public function indexEvento(Request $request)
+    {
+        $idCategoria = $request->input('cats');
+
+        if ($idCategoria == "") {
+            $productos = Producto::listarProductos();
+        } else {
+            $productos = Producto::listarProductosByIdCategoria($idCategoria);
+        }
+        $tipoVenta = 1;
+        $categorias = Categoria::listarCategorias();
+
+        $data = [
+            'productos' => $productos,
+            'categorias' => $categorias,
+            'tipoventa' => $tipoVenta
+        ];
         session(['productovista' => 'normal']);
 
         return view('food.index', $data);
