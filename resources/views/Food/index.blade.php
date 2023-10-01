@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="/css/cardfood.css">
 <link rel="stylesheet" href="/css/food.css">
 
@@ -16,7 +15,7 @@
                 <select name="categoria" class="form-control">
                     <option value="">Todas las categorías</option>
                     @foreach ($categorias as $categoria)
-                        <option value="{{ $categoria->id_categoria }}">{{ $categoria->descripcion }}</option>
+                    <option value="{{ $categoria->id_categoria }}">{{ $categoria->descripcion }}</option>
                     @endforeach
                 </select>
                 <button type="submit" class="btn btn-primary ms-2 ml-2 ml-auto">Filtrar</button>
@@ -34,32 +33,35 @@
     <div class="container pt-2">
         <div class="products">
             @foreach ($productos as $producto)
-                @if ($producto->estado == 1)
-                    <div class="product">
-                        <div class="image">
-                        <img class="imgt" src="{{ $producto->image_url }}" alt=""> 
+            @if ($producto->estado == 1)
+            <div class="product">
+                <div class="image">
+                    <img class="imgt" src="{{ $producto->image_url }}" alt="">
+                </div>
+                <div class="namePrice">
+                    <h3>{{ $producto->nombre }}</h3>
+                    <span>{{ "$ " . $producto->precio }}</span>
+                </div>
+                <p class="mb-5">{{ $producto->descripcion_prod }}</p>
+                @auth
+                <form method="POST" action="{{ route('carrito.agregarProducto') }}">
+                    @csrf
+                    <input type="hidden" name="id_producto" value="{{ $producto->id_producto }}">
+                    <div class="bay">
+                        <div style="display: flex; align-items: center;">
+                            @if($tipoventa !=1)
+                            <div class="stars">
+                                <input type="number" name="cantidad" value="1" min="1" max="10">
+                            </div>
+                            @endif
+                            
+                            <button type="submit">Agregar al carrito</button>
                         </div>
-                        <div class="namePrice">
-                            <h3>{{ $producto->nombre }}</h3>
-                            <span>{{ "$ " . $producto->precio }}</span>
-                        </div>
-                        <p class="mb-5">{{ $producto->descripcion_prod }}</p>
-                        @auth
-                            <form method="POST" action="{{ route('carrito.agregarProducto') }}">
-                                @csrf
-                                <input type="hidden" name="id_producto" value="{{ $producto->id_producto }}">
-                                <div class="bay">
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="stars">
-                                            <input type="number" name="cantidad" value="1" min="1" max="10">
-                                        </div>
-                                        <button type="submit">Agregar al carrito</button>
-                                    </div>
-                                </div>
-                            </form>
-                        @endauth
                     </div>
-                @endif
+                </form>
+                @endauth
+            </div>
+            @endif
             @endforeach
         </div>
     </div>
