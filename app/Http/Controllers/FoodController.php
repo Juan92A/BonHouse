@@ -11,7 +11,7 @@ class FoodController extends Controller
 {
     public function index(Request $request)
     {
-        $idCategoria = $request->input('categoria');
+        $idCategoria = $request->input('cats');
 
         
 
