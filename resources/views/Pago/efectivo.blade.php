@@ -143,6 +143,7 @@ margin:0%
                                     <tr>
                                         <td colspan="3" class="text-right font-weight-bold">TOTAL A PAGAR:</td>
                                         <td class="font-weight-bold">${{ number_format($total, 2) }}</td>
+                                        <input hidden  name="total_pagar" value="{{ number_format($total, 2) }}">
                                     </tr>
                                 </tfoot>
                             </table>
