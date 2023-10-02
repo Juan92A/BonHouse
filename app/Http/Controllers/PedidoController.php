@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
     use App\Models\Producto;
-    use App\Models\pedido;
+    use App\Models\pedido;    
+    use App\Models\evento;
     use App\Models\detallepedido;
+    use App\Models\DetalleEvento;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Controller;
     use Illuminate\Support\Facades\Session;
@@ -110,6 +112,65 @@ namespace App\Http\Controllers;
             }
         }
 
+        public function procesarPedidoEvento(Request $request)
+        {
+            
+            $carrito = $request->session()->get('carritoEvento', []);
+            
+            // Itera sobre los elementos del carrito
+          
+            // Actualiza el carrito en la sesión
+            $request->session()->put('carritoEvento', $carrito);
+            // Crear un nuevo Pedido
+            $evento = new Evento();
+            $evento->total_pagar = $request->input('total_pagar');
+            $evento->fecha_pedido = now();
+            $evento->id_usuario = auth()->user()->id;
+            $evento->id_estado_pedido = $request->input('id_estado_pedido');
+            $evento->nombre_cliente = $request->input('nombre_cliente');
+            $evento->cantidad_personas = $request->input('cantidad_personas');
+            $evento->fecha_evento = $request->input('fecha_evento');
+            $evento->telefono = $request->input('telefono');            
+            $evento->email = $request->input('email');
+            $evento->save();
+          
+            foreach ($carrito as &$item) {
+            // Incrementa la cantidad del producto
+                    $item['cantidad'] += $request->input('cantidad_personas');
+               
+            }
+            
+            // Crear los detalles de pedido para cada producto en el carrito
+            foreach ($carrito as $item) {
+                $DetalleEvento = new DetalleEvento();
+                $DetalleEvento->id_pedido = $evento->id;
+                $DetalleEvento->id_producto = $item['producto']->id_producto;
+                $DetalleEvento->cantidad_personas = $item['cantidad']; // Asignar la cantidad del producto del carrito
+
+                $DetalleEvento->save(); // Guardar el detalle de pedido en la base de datos
+            }
+
+            // Vaciar el carrito
+            $request->session()->forget('carritoEvento');
+
+            // Redirigir y mostrar mensajes según el resultado
+            if ($evento->id === null) {
+                $request->session()->flash('error_pedido', 'No se pudo procesar el pedido, por favor inténtelo de nuevo.');
+                return redirect()->route('pago.efectivo');
+            } else {
+                $request->session()->flash('success_pedido', '¡El pedido se ha creado exitosamente!');
+                $id_usuario = auth()->user()->id;
+                $fecha = $request->input('fecha_pedido', date('Y-m-d'));
+                $id_estado = $request->input('id_estado', '');
+
+                
+            
+                $eventoModel = new evento();
+                $eventos = $eventoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
+
+                return view('Usuario.evento', ['pedidos' => $eventos]);
+            }
+        }
 
 
         

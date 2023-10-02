@@ -44,21 +44,35 @@
                 </div>
                 <p class="mb-5">{{ $producto->descripcion_prod }}</p>
                 @auth
+                @if($tipoventa !=1)
                 <form method="POST" action="{{ route('carrito.agregarProducto') }}">
                     @csrf
                     <input type="hidden" name="id_producto" value="{{ $producto->id_producto }}">
                     <div class="bay">
                         <div style="display: flex; align-items: center;">
-                            @if($tipoventa !=1)
+                           
                             <div class="stars">
                                 <input type="number" name="cantidad" value="1" min="1" max="10">
                             </div>
-                            @endif
+                       
                             
                             <button type="submit">Agregar al carrito</button>
                         </div>
                     </div>
                 </form>
+                @else
+                <form method="POST" action="{{ route('evento.agregarProducto') }}">
+                    @csrf
+                    <input type="hidden" name="id_producto" value="{{ $producto->id_producto }}">
+                    <div class="bay">
+                        <div style="display: flex; align-items: center;">
+                           
+                            
+                            <button type="submit">Agregar al carrito</button>
+                        </div>
+                    </div>
+                </form>
+                @endif
                 @endauth
             </div>
             @endif

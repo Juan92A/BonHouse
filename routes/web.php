@@ -63,7 +63,6 @@ Route::view('/nosotros', 'home.nosotros')->name('nosotros');
 
 Route::get('/productos', [FoodController::class, 'index'])->name('food.index');
 
-Route::get('/productos/eventos', [FoodController::class, 'indexEvento'])->name('food.evento');
 
 
 
@@ -162,3 +161,12 @@ Route::get('promociones/add', [AdminController::class, 'PromocionesAdd'])->name(
 
 
 Route::get('/eventos', [EventoController::class, 'verEvento'])->name('evento.carrito');
+Route::post('/evento/agregar-producto', [EventoController::class, 'agregarProducto'])->name('evento.agregarProducto');
+
+Route::get('/productos/eventos', [FoodController::class, 'indexEvento'])->name('food.evento');
+Route::post('/carrito/eliminarProducto', [EventoController::class, 'eliminarProducto'])->name('evento.eliminarProducto');
+
+Route::post('/pago/pagarEventos', [PagoController::class, 'pagarEvento'])->name('pago.evento');
+Route::get('/pedido/procesarEvento', [PedidoController::class, 'procesarPedidoEvento'])->name('pedido.procesarEvento');
+
+Route::post('/detalle-evento',  [AdminController::class, 'detalleEvento'])->name('detalle.evento');

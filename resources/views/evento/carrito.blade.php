@@ -31,7 +31,7 @@
                                     @php
                                     $total = 0; // variable para acumular el total
                                     @endphp
-                                    @foreach ($carrito as $item)
+                                    @foreach ($carritoEvento as $item)
                                         <tr>
                                             <td>{{ $item['producto']->nombre }}</td>
                                             <td>{{ $item['cantidad'] }}</td>
@@ -44,7 +44,7 @@
                                                 @endphp
                                             </td>
                                             <td>
-                                                <form action="{{ route('carrito.eliminarProducto') }}" method="POST">
+                                                <form action="{{ route('evento.eliminarProducto') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="id_producto" value="{{ $item['producto']->id_producto }}">
                                                     <button class="btn btn-danger" type="submit">Eliminar</button>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="row align-items-center">
-                    <form action="{{ route('pago.pagar') }}" method="POST">
+                    <form action="{{ route('pago.evento') }}" method="POST">
                             @csrf
                             <div class="d-flex justify-content-center align-items-center flex-column">
                                 <div class="my-3">

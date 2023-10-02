@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
     use Illuminate\Support\Facades\DB;
     use App\Models\Producto;
+    use App\Models\evento;
     use App\Models\pedido;
     use App\Models\Categoria;
     use App\Models\detallepedido;
+    use App\Models\detalleEvento;
     use App\Models\User;
     use Illuminate\Support\Facades\Storage; // Importa la clase Storage
     use Illuminate\Http\Request;
@@ -187,6 +189,25 @@ namespace App\Http\Controllers;
 
             // Pasamos los resultados a la vista del detalle del pedido
             return view('Admin.DetallePedido', ['pedidos' => $pedidos, 'detallesPedido' => $detallesPedido]);
+        }
+
+        public function detalleEvento(Request $request)
+        {
+            $idPedido = $request->input('id_pedido');
+            
+            $evento = new evento();
+            // Obtenemos el pedido por su id usando Eloquent
+            $evento = $evento->obtenerPedidoPorId($idPedido);
+
+
+            // llamamos al modelo DetallePedido y creamos una instancia
+            $detallevento = new DetalleEvento();
+           
+            // llamamos al método obtenerDetallesPedido y pasamos el id del pedido como argumento
+            $detallevento = $detallevento->obtenerDetallesPedido($idPedido);
+
+            // Pasamos los resultados a la vista del detalle del pedido
+            return view('Admin.detalleEvento', ['eventos' => $evento, 'detalleEventos' => $detallevento]);
         }
 
         public function ProductosAdd()

@@ -32,28 +32,28 @@ class EventoController extends Controller
             // Verificar si el producto existe
             if ($producto) {
                 // Obtener el carrito actual
-                $carrito = session()->has('carrito') ? session('carrito') : array();
+                $carritoEvento = session()->has('carritoEvento') ? session('carritoEvento') : array();
     
                 // Verificar si el producto ya está en el carrito
                 if (isset($carrito[$id_producto])) {
                     // Actualizar la cantidad del producto en el carrito
-                    $carrito[$id_producto]['cantidad'] += $cantidad;
+                    $carritoEvento[$id_producto]['cantidad'] += $cantidad;
                 } else {
                     // Agregar el producto al carrito
-                    $carrito[$id_producto] = array(
+                    $carritoEvento[$id_producto] = array(
                         'producto' => $producto,
                         'cantidad' => $cantidad
                     );
                 }
     
                 // Actualizar el carrito en la sesión
-                session(['carrito' => $carrito]);
+                session(['carritoEvento' => $carritoEvento]);
 
                 // Imprimir el carrito para verificar los datos (opcional)
                 //dd($carrito);
     
                 // Redirigir al listado de productos
-                return redirect()->route('food.index'); // Ajusta la ruta de redirección según tu proyecto
+                return redirect()->route('food.evento'); // Ajusta la ruta de redirección según tu proyecto
             }
         }
     }
@@ -62,10 +62,10 @@ class EventoController extends Controller
     public function verEvento()
     {
         // Obtiene los datos del carrito de la sesión
-        $carrito = session()->has('carrito') ? session('carrito') : array();
+        $carritoEvento = session()->has('carritoEvento') ? session('carritoEvento') : array();
     
         // Renderiza la vista del carrito con los datos del carrito
-        return view('evento.carrito', ['carrito' => $carrito]);
+        return view('evento.carrito', ['carritoEvento' => $carritoEvento]);
     }
     
 
@@ -77,20 +77,22 @@ class EventoController extends Controller
             $id_producto = $request->input('id_producto');
 
             // Obtener el carrito actual
-            $carrito = session()->has('carrito') ? session('carrito') : array();
+            $carritoEvento = session()->has('carritoEvento') ? session('carritoEvento') : array();
 
             // Verificar si el producto está en el carrito
-            if (isset($carrito[$id_producto])) {
+            if (isset($carritoEvento[$id_producto])) {
                 // Eliminar el producto del carrito
-                unset($carrito[$id_producto]);
+                unset($carritoEvento[$id_producto]);
 
                 // Actualizar el carrito en la sesión
-                session(['carrito' => $carrito]);
+                session(['carritoEvento' => $carritoEvento]);
             }
         }
 
         // Redirigir al carrito
-        return redirect()->route('home.carrito');
+        return redirect()->route('evento.carrito');
     }
+
+    
 }
 
