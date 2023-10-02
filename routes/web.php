@@ -170,3 +170,11 @@ Route::post('/pago/pagarEventos', [PagoController::class, 'pagarEvento'])->name(
 Route::get('/pedido/procesarEvento', [PedidoController::class, 'procesarPedidoEvento'])->name('pedido.procesarEvento');
 
 Route::post('/detalle-evento',  [AdminController::class, 'detalleEvento'])->name('detalle.evento');
+
+
+
+///cambio de vista categorias
+Route::get('/VerCategorias2', [FoodController::class, 'VerCategorias2'])->name('food.categorias2');
+
+
+Route::get('/VerCategorias', [FoodController::class, 'VerCategorias'])->name('food.categorias');

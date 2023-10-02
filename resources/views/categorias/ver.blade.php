@@ -1,33 +1,16 @@
-
 <link rel="stylesheet" href="/css/cardCats.css">
 
 @extends('layouts.app')
 
 @section('content')
 <div class="imagen" style="
-    background-image: url('imgC/fondo2.png');
+    background:#885838;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 950px; 
+    height:100%
 ">
 
-    {{-- <div class="row">
-        <h1 class="text-center mt-3" style="color: #c43f3f;">Listado de productos</h1>
-
-        <form method="GET" action="{{ route('food.index') }}" class="mb-4 form-inline col">
-            <div class="form-group d-flex">
-                <label for="categoria" class="sr-only">Categoría:</label>
-                <select name="categoria" class="form-control">
-                    <option value="">Todas las categorías</option>
-                    @foreach ($categorias as $categoria)
-                        <option value="{{ $categoria->id_categoria }}">{{ $categoria->descripcion }}</option>
-                    @endforeach
-                </select>
-                <button type="submit" class="btn btn-primary ms-2 ml-2 ml-auto">Filtrar</button>
-            </div>
-        </form>
-    </div> --}}
 
     <style>
         .sin-contorno {
@@ -51,23 +34,43 @@
     <div class="container pt-2 " >
         <div class="products mb-5">
             @foreach ($categorias as $categorias)
-                @if ($categorias->estado == 1)
-                    <form method="GET" action="{{ route('food.index') }}" class="mb-4 form-inline col">
-                        <button type="submit" class="sin-contorno" >
-                            <div class="product mt-5">
-                                <div class="image">
-                                    <img class="imgt" src="{{ $categorias->imagen_cat }}" alt="">
-                                    <input type="text" name="cats" id="" value="{{ $categorias->id_categoria }}" hidden>
-                                    <div class="texto-centrado">{{ $categorias->descripcion }}</div>
-                                </div>
-                            </div>
-                        </button>
 
-                        {{-- {{ dd($categoria->imagen_cat) }} --}}
-                        
-                    </form>
+                @if($tipoventa != 1)
+                    @if ($categorias->estado == 1)
+                        <form method="GET" action="{{ route('food.index') }}" class="mb-4 form-inline col">
+                            <button type="submit" class="sin-contorno" >
+                                <div class="product mt-5">
+                                    <div class="image">
+                                        <img class="imgt" src="{{ $categorias->imagen_cat }}" alt="">
+                                        <input type="text" name="cats" id="" value="{{ $categorias->id_categoria }}" hidden>
+                                        <div class="texto-centrado">{{ $categorias->descripcion }}</div>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    @endif
+                    
+                
+                @else
+                    @if ($categorias->estado == 1)
+                        <form method="GET" action="{{ route('food.evento') }}" class="mb-4 form-inline col">
+                            <button type="submit" class="sin-contorno" >
+                                <div class="product mt-5">
+                                    <div class="image">
+                                        <img class="imgt" src="{{ $categorias->imagen_cat }}" alt="">
+                                        <input type="text" name="cats" id="" value="{{ $categorias->id_categoria }}" hidden>
+                                        <div class="texto-centrado">{{ $categorias->descripcion }}</div>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    @endif
+                
                 @endif
             @endforeach
+
+          
+
         </div>
     </div>
 </div>

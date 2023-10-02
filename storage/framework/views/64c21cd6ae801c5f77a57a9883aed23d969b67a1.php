@@ -125,7 +125,7 @@
 <nav class="navbar navbar-expand-lg bg-light navbar-fixed">
 
     <div class="container p-0">
-        <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse">
+        <img src="<?php echo e(asset('imgC/logo1.jpeg')); ?>" class="d-block mx-auto img-logo " alt="Logo BonHouse">
         <a class="navbar-brand m-1" href="/">BonHouse</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,7 +145,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Inicio</a>
                     </li>
-                    @auth
+                    <?php if(auth()->guard()->check()): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/productos">Productos</a>
                     </li>
@@ -155,20 +155,17 @@
                             aria-expanded="false">Pedidos</a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="nav-link" href="{{ route('home.carrito') }}">
+                                <a class="nav-link" href="<?php echo e(route('home.carrito')); ?>">
                                     <i class="fa-solid fa-cart-shopping"></i> Pedidos en Evento
-                                    @if(session()->has('carrito'))
-                                    <span class="badge bg-danger">{{ count(session('carrito')) }}</span>
-                                    @endif
+                                    <?php if(session()->has('carrito')): ?>
+                                    <span class="badge bg-danger"><?php echo e(count(session('carrito'))); ?></span>
+                                    <?php endif; ?>
                                 </a>
                             </li>
 
 
                             <li>
-                                {{-- <a class="nav-link " href="#"  role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
-                                <i class="fas fa-clipboard-list"></i> Atender Eventos
-                            </a> --}}
+                                
 
                                 <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false"
@@ -176,9 +173,9 @@
                                     <i class="fas fa-clipboard-list"></i> Atender Pedidos
                                 </a>
 
-                                <form id="pedido-form" action="{{ route('admin.pedidos') }}" method="POST"
+                                <form id="pedido-form" action="<?php echo e(route('admin.pedidos')); ?>" method="POST"
                                     style="display: none;">
-                                    @csrf
+                                    <?php echo csrf_field(); ?>
                                     <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido">
                                     <select id="id_estado" name="id_estado" class="form-control">
                                         <option value="">Todos</option>
@@ -202,9 +199,9 @@
                         </ul>
                     </li>
 
-                    @endauth
+                    <?php endif; ?>
 
-                    @guest
+                    <?php if(auth()->guard()->guest()): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Productos</a>
                     </li>
@@ -216,9 +213,9 @@
                             <li>
                                 <a class="nav-link" href="/login">
                                     <i class="fa-solid fa-cart-shopping"></i> Pedidos en Evento
-                                    @if(session()->has('carrito'))
-                                    <span class="badge bg-danger">{{ count(session('carrito')) }}</span>
-                                    @endif
+                                    <?php if(session()->has('carrito')): ?>
+                                    <span class="badge bg-danger"><?php echo e(count(session('carrito'))); ?></span>
+                                    <?php endif; ?>
                                 </a>
                             </li>
 
@@ -243,7 +240,7 @@
                                     eventos</a></li>
                         </ul>
                     </li>
-                    @endguest
+                    <?php endif; ?>
 
 
 
@@ -253,21 +250,21 @@
 
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    @if (Route::has('login'))
+                    <?php if(Route::has('login')): ?>
                     <li class="ms-auto">
                         <div class="hidden fixed ">
-                            @auth
+                            <?php if(auth()->guard()->check()): ?>
                             <div class="collapse navbar-collapse" id="navbarScroll">
                                 <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll"
                                     style="--bs-scroll-height: 100px;">
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa-regular fa-user"></i> <span>{{ auth()->user()->name }}</span>
+                                            <i class="fa-regular fa-user"></i> <span><?php echo e(auth()->user()->name); ?></span>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li class="dropdown-item">
-                                                <a class="dropdown-link" href="{{ route('usuario.perfil') }}">
+                                                <a class="dropdown-link" href="<?php echo e(route('usuario.perfil')); ?>">
                                                     <i class="fas fa-user"></i> Mi perfil
                                                 </a>
                                             </li>
@@ -276,12 +273,13 @@
 
                                                 <a href="#"
                                                     onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
-                                                    <i class="fas fa-clipboard-list"></i> {{ __('Mis pedidos') }}
+                                                    <i class="fas fa-clipboard-list"></i> <?php echo e(__('Mis pedidos')); ?>
+
                                                 </a>
 
-                                                <form id="pedido-form" action="{{ route('usuario.pedidos') }}"
+                                                <form id="pedido-form" action="<?php echo e(route('usuario.pedidos')); ?>"
                                                     method="POST" style="display: none;">
-                                                    @csrf
+                                                    <?php echo csrf_field(); ?>
                                                     <input type="date" class="form-control" id="fecha_pedido"
                                                         name="fecha_pedido">
                                                     <select id="id_estado" name="id_estado" class="form-control">
@@ -298,13 +296,13 @@
                                                 <hr class="dropdown-divider">
                                             </li>
                                             <li class="dropdown-item">
-                                                <a href="{{ route('logout') }}"
+                                                <a href="<?php echo e(route('logout')); ?>"
                                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                    {{ __('Cerrar sesión') }} <i class="fa-solid fa-sign-out"></i>
+                                                    <?php echo e(__('Cerrar sesión')); ?> <i class="fa-solid fa-sign-out"></i>
                                                 </a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST"
                                                     style="display: none;">
-                                                    @csrf
+                                                    <?php echo csrf_field(); ?>
                                                 </form>
                                             </li>
                                         </ul>
@@ -315,7 +313,7 @@
 
 
 
-                            @else
+                            <?php else: ?>
 
 
                             <div class="collapse navbar-collapse" id="navbarScroll">
@@ -323,29 +321,29 @@
                                 <ul class="navbar-nav align-middle">
                                     <!-- Pantallas grandes  - ocultar -->
                                     <li class="nav-item registrar-btn d-none d-lg-block">
-                                        <a href="{{ route('login') }}" class="btn btn-primary btn-sm nav-link">
+                                        <a href="<?php echo e(route('login')); ?>" class="btn btn-primary btn-sm nav-link">
                                             <i class="fa-solid fa-user"></i> login
                                         </a>
 
                                     </li>
                                     <!-- Pantallas pequeñas login - mostrar -->
                                     <li class="nav-item registrar-btn d-none d-lg-block">
-                                        @if (Route::has('register'))
-                                        <a href="{{ route('register') }}"
+                                        <?php if(Route::has('register')): ?>
+                                        <a href="<?php echo e(route('register')); ?>"
                                             class="btn btn-secondary btn-sm nav-link">Register</a>
-                                        @endif
+                                        <?php endif; ?>
 
                                     </li>
                                 </ul>
                             </div>
 
-                            @endauth
+                            <?php endif; ?>
                         </div>
                     </li>
 
-                    @endif
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
     </div>
-</nav>
+</nav><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/layouts/nav.blade.php ENDPATH**/ ?>
