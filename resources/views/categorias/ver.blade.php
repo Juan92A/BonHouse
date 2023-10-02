@@ -1,14 +1,16 @@
+
 <link rel="stylesheet" href="/css/cardCats.css">
 
 @extends('layouts.app')
 
 @section('content')
 <div class="imagen" style="
-    background:#885838;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height:100%
+background:#e2d9c2;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+height:100%;
+margin:0%
 ">
 
 
