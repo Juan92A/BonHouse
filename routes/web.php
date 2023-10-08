@@ -86,7 +86,7 @@ Route::post('/carrito/eliminar-producto', 'CarritoController@eliminarProducto')-
 
 Route::post('/pago/pagar', 'CarritoController@procesarPago')->name('pago.pagar');
 
-Route::post('/carrito/eliminarProducto', [CarritoController::class, 'eliminarProducto'])->name('carrito.eliminarProducto');
+Route::post('/carrito/eliminar-producto', [CarritoController::class, 'eliminarProducto'])->name('carrito.eliminarProducto');
 
 
 Route::post('/pedido/procesar', [PedidoController::class, 'procesarPedido'])->name('pago.efectivo');

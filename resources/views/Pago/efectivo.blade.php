@@ -105,7 +105,13 @@ margin:0%
             <div class="position-relative">
                 <img src="{{ asset('imgC/baner2.jpg') }}" alt="Imagen de encabezado" class="card-img-top w-100" style="max-height: 180px;">
                 <div class="overlay-text">
-                    <h2 class="vintage-text2">Resumen del pedido</h2>
+                    @if($tipoventa == 1 )
+                    <h2 class="vintage-text2 text-white">Resumen del evento</h2>
+
+                    @else
+                    <h2 class="vintage-text2 text-white">Resumen del pedido</h2>
+
+                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -153,8 +159,9 @@ margin:0%
             </div>
 
             <div class="flex-fill col-md-12 mt-4 p-3">
+            @if($tipoventa == 1)
                 <h1 class="vintage-text">Programar un Evento</h1>
-            
+            @endif
                 <div class="mb-3">
                     <label for="nombre_cliente" class="form-label">Nombre del cliente:</label>
                     <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" required>

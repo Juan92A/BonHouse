@@ -21,7 +21,7 @@
                         <tr>
                             <td><?php echo e($detalle->nombre); ?></td>
                             <td><?php echo e($detalle->cantidad_personas); ?></td>
-                            <td><?php echo e($detalle->precio); ?></td>
+                            <td>$<?php echo e($detalle->precio); ?></td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

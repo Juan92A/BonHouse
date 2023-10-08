@@ -1,14 +1,16 @@
+
 <link rel="stylesheet" href="/css/cardCats.css">
 
 
 
 <?php $__env->startSection('content'); ?>
 <div class="imagen" style="
-    background:#885838;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height:100%
+background:#e2d9c2;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+height:100%;
+margin:0%
 ">
 
 
@@ -75,4 +77,5 @@
     </div>
 </div>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/categorias/ver.blade.php ENDPATH**/ ?>

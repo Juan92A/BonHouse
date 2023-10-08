@@ -21,7 +21,7 @@
                         <tr>
                             <td>{{ $detalle->nombre }}</td>
                             <td>{{ $detalle->cantidad_personas }}</td>
-                            <td>{{ $detalle->precio }}</td>
+                            <td>${{ $detalle->precio }}</td>
                         </tr>
                     @endforeach
                 </tbody>

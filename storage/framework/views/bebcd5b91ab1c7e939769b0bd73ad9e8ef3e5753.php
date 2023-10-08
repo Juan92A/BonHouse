@@ -2,13 +2,9 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="container">
-    <h1 class="my-5">Pedido de <?php echo e($pedidos->name); ?> fecha: <?php echo e($pedidos->fecha_pedido); ?></h1>
+    <h1 class="my-5">Pedido de <?php echo e($pedidos->nombre_cliente); ?></h1>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Lugar de envío: <?php echo e($pedidos->nombre_cliente); ?></h3>
-        </div>
-    </div>
+  <h2> fecha de pedido: <?php echo e($pedidos->fecha_pedido); ?></h2>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-hover">
@@ -24,7 +20,7 @@
                         <tr>
                             <td><?php echo e($detalle->nombre); ?></td>
                             <td><?php echo e($detalle->cantidad); ?></td>
-                            <td><?php echo e($detalle->precio); ?></td>
+                            <td>$<?php echo e($detalle->precio); ?></td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

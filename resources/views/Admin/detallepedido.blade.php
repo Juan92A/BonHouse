@@ -2,13 +2,9 @@
 
 @section('content')
 <div class="container">
-    <h1 class="my-5">Pedido de {{ $pedidos->name }} fecha: {{ $pedidos->fecha_pedido }}</h1>
+    <h1 class="my-5">Pedido de {{ $pedidos->nombre_cliente }}</h1>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Lugar de envío: {{ $pedidos->nombre_cliente }}</h3>
-        </div>
-    </div>
+  <h2> fecha de pedido: {{ $pedidos->fecha_pedido }}</h2>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-hover">
@@ -24,7 +20,7 @@
                         <tr>
                             <td>{{ $detalle->nombre }}</td>
                             <td>{{ $detalle->cantidad }}</td>
-                            <td>{{ $detalle->precio }}</td>
+                            <td>${{ $detalle->precio }}</td>
                         </tr>
                     @endforeach
                 </tbody>
