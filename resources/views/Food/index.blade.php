@@ -9,7 +9,7 @@
     <div class="row">
         <h1 class="text-center mt-3" style="color: #c43f3f;">Listado de productos</h1>
 
-        <form method="GET" action="{{ route('food.index') }}" class="mb-4 form-inline col">
+        {{-- <form method="GET" action="{{ route('food.index') }}" class="mb-4 form-inline col">
             <div class="form-group d-flex">
                 <label for="categoria" class="sr-only">Categoría:</label>
                 <select name="categoria" class="form-control">
@@ -20,7 +20,7 @@
                 </select>
                 <button type="submit" class="btn btn-primary ms-2 ml-2 ml-auto">Filtrar</button>
             </div>
-        </form>
+        </form> --}}
     </div>
 
     @guest

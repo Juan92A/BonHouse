@@ -48,17 +48,17 @@ namespace App\Http\Controllers;
                 return redirect()->route('pago.efectivo');
             } else {
                 $request->session()->flash('success_pedido', '¡El pedido se ha creado exitosamente!');
-                $id_usuario = auth()->user()->id;
-                $fecha = $request->input('fecha_pedido', date('Y-m-d'));
-                $id_estado = $request->input('id_estado', '');
 
-                
-            
-                $pedidoModel = new Pedido();
-                $pedidos = $pedidoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
-            
+                $fechaActual = now()->format('Y-m-d');
+                $fecha = $request->input('fecha_pedido', $fechaActual);
+                $idEstado = $request->input('id_estado');
 
-                return view('Usuario.Pedido', ['pedidos' => $pedidos]);
+                $pedido = new Pedido();
+                $pedidos = $pedido->listarPedidos($fecha, $idEstado);
+
+          
+                return view('Admin.Pedidos', ['pedidos' => $pedidos]);
+
             }
         }
 
