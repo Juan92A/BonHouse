@@ -50,6 +50,22 @@ namespace App\Http\Controllers;
             return view('Admin.Pedidos', ['pedidos' => $pedidos]);
         }
 
+        public function BorraPedidos(Request $request)
+        {
+             // Borra todos los registros de la tabla de pedidos
+             detallepedido::truncate();
+             DB::statement('SET FOREIGN_KEY_CHECKS=0');
+             Pedido::truncate();
+             DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+            // Opcionalmente, puedes redirigir a una vista o realizar alguna otra acción después de borrar los registros
+            return redirect()->route('home.carrito');
+
+        }
+
+
+        
+
         public function Addcategoria()
         {
             return view('categorias.create');

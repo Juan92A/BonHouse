@@ -35,19 +35,19 @@
 /* Estilo para los enlaces del menú */
 .navbar-nav .nav-link {
     font-family: 'Cursive', cursive;
+    /* Fuente estilo vintage */
     font-size: 20px;
-    color: #000; /* Cambia el color de fuente a negro */
+    /* Tamaño de fuente */
+    color: #FFF;
+    /* Color de fuente blanco */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Sombra de texto */
 }
 
-/* Estilo para los enlaces del menú cuando se posiciona el cursor sobre ellos (hover) */
 .navbar-nav .nav-link:hover {
-    color: #8B4513; /* Cambia el color del texto al color marrón al pasar el mouse */
-    background-color: rgb(252, 227, 182);
-    border-radius: 10px;
-    transition: color 0.3s, background-color 0.3s;
+    color: #FFD700;
+    /* Color dorado al pasar el mouse sobre los enlaces */
 }
-
 
 /* Estilo para el botón de carrito */
 .carrito-btn {
@@ -196,14 +196,7 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-expanded="false">Eventos</a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a class="nav-link" href="/eventos">
-                                    <i class="fa-solid fa-cart-shopping"></i> Crear eventos
-                                    @if(session()->has('carritoEvento'))
-                                    <span class="badge bg-danger">{{ count(session('carritoEvento')) }}</span>
-                                    @endif
-                                </a>
-                            </li>
+                            <li><a class="nav-link" href="/eventos"><i class="fas fa-calendar-plus"></i> Crear eventos</a></li>
                             <li><a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Visualizar eventos</a>
                             </li>
                         </ul>
@@ -356,3 +349,6 @@
         </div>
     </div>
 </nav>
+
+
+

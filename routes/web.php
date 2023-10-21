@@ -178,3 +178,6 @@ Route::get('/VerCategorias2', [FoodController::class, 'VerCategorias2'])->name('
 
 
 Route::get('/VerCategorias', [FoodController::class, 'VerCategorias'])->name('food.categorias');
+
+
+Route::get('/borrar', [AdminController::class, 'BorraPedidos'])->name('borrar');
