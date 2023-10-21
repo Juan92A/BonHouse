@@ -75,33 +75,21 @@
         }
 
         .vintage-table tfoot td {
-            font-weight: bold; /* Texto del pie de tabla en negrita */
+            font-weigh
+            
+            .text-center {
+    text-align: center;
+}
+
+
+
+
+t: bold; /* Texto del pie de tabla en negrita */
         }
     </style>
 
-    <h1 class="vintage-text">Pedidos por Fecha</h1>
-    <form method="post" action="<?php echo e(route('admin.pedidos')); ?>">
-        <?php echo csrf_field(); ?>
-
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="fecha_pedido" class="mb-2">Fecha:</label>
-                <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido" >
-            </div>
-            <div class="form-group col-md-4">
-                <label for="id_estado" class="mb-2">Estado:</label>
-                <select id="id_estado" name="id_estado" class="form-control">
-                    <option value="">Todos</option>
-                    <option value="1">En proceso</option>
-                    <option value="2">Finalizado</option>
-                    <option value="3">Cancelado</option>
-                </select>
-            </div>
-            <div class="form-group col-md-4 mt-4">
-                <button type="submit" class="vintage-button">Filtrar</button>
-            </div>
-        </div>
-    </form>
+    <h1 class="vintage-text mt-5">Pedidos Realizados</h1>
+    
 
     <hr>
 
@@ -110,6 +98,7 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>nombre</th>
                     <th>Total a Pagar</th>
                     <th>Fecha del Pedido</th>
                     <th>Estado</th>
@@ -125,7 +114,8 @@
                 <?php $__currentLoopData = $pedidos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pedido): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                     <td><?php echo e($pedido->id_pedido); ?></td>
-                    <td><?php echo e($pedido->total_pagar); ?></td>
+                    <td><?php echo e($pedido->nombre_cliente); ?></td>
+                    <td>$<?php echo e($pedido->total_pagar); ?></td>
                     <td><?php echo e($pedido->fecha_pedido); ?></td>
                      
                     <td>
@@ -175,12 +165,57 @@
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                
                 <tr>
-                    <td class="vintage-button">Total</td>
-                    <td class="vintage-button"><?php echo e($totalfinal); ?></td>
+                    <td class="">Total</td>
+                    <td class="">$<?php echo e($totalfinal); ?> </td>
                 </tr>
+               
             </tbody>
         </table>
-    </div>
+
+        <br>
+       
+        <div class="text-center">
+            <a type="button" id="cambiarEstadosButton" class="btn btn-warning" onclick="mostrarAlerta()">Finalizar Ventas en Evento</a>
+            <a href="#" onclick="window.print()" class="btn btn-primary btn-sm">Guardar Informe</a>
+        </div>
+        
+        
+
+        <br>
+    </div> 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function mostrarAlerta() {
+
+        Swal.fire({
+            title: '¿Finalizar Ventas en Evento?',
+            text: 'Esto eliminará todos los pedidos. ¿Deseas continuar?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, Finalizar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Aquí puedes poner la lógica para eliminar los registros
+                window.location.href = "<?php echo e(route('borrar')); ?>";
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // El usuario canceló la operación
+                Swal.fire('Operación cancelada', '', 'error');
+            }
+        });
+
+
+    }
+</script>
+
+
+
+
+
+
+
+    
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/Admin/Pedidos.blade.php ENDPATH**/ ?>

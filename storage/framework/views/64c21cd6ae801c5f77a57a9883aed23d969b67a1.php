@@ -346,4 +346,8 @@
             </div>
         </div>
     </div>
-</nav><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/layouts/nav.blade.php ENDPATH**/ ?>
+</nav>
+
+
+
+<?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/layouts/nav.blade.php ENDPATH**/ ?>

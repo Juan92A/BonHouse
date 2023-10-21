@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Producto; // Asegúrate de tener el namespace correcto para el modelo Producto
+use App\Models\Categoria; 
+
 
 class EventoController extends Controller
 {
@@ -53,7 +55,15 @@ class EventoController extends Controller
                 //dd($carrito);
     
                 // Redirigir al listado de productos
-                return redirect()->route('food.evento'); // Ajusta la ruta de redirección según tu proyecto
+                $tipoVenta = 1;
+                $categorias = Categoria::listarCategorias();
+        
+                $data = [
+                    'categorias' => $categorias,
+                    'tipoventa' => $tipoVenta
+                ];
+                session(['productovista' => 'normal']);
+                return view('categorias.ver', $data);
             }
         }
     }

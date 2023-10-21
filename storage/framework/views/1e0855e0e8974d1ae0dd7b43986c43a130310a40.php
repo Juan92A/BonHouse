@@ -9,18 +9,7 @@
     <div class="row">
         <h1 class="text-center mt-3" style="color: #c43f3f;">Listado de productos</h1>
 
-        <form method="GET" action="<?php echo e(route('food.index')); ?>" class="mb-4 form-inline col">
-            <div class="form-group d-flex">
-                <label for="categoria" class="sr-only">Categoría:</label>
-                <select name="categoria" class="form-control">
-                    <option value="">Todas las categorías</option>
-                    <?php $__currentLoopData = $categorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categoria): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <option value="<?php echo e($categoria->id_categoria); ?>"><?php echo e($categoria->descripcion); ?></option>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </select>
-                <button type="submit" class="btn btn-primary ms-2 ml-2 ml-auto">Filtrar</button>
-            </div>
-        </form>
+        
     </div>
 
     <?php if(auth()->guard()->guest()): ?>

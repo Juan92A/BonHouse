@@ -75,12 +75,21 @@
         }
 
         .vintage-table tfoot td {
-            font-weight: bold; /* Texto del pie de tabla en negrita */
+            font-weigh
+            
+            .text-center {
+    text-align: center;
+}
+
+
+
+
+t: bold; /* Texto del pie de tabla en negrita */
         }
     </style>
 
-    <h1 class="vintage-text">Pedidos por Fecha</h1>
-    <form method="post" action="{{ route('admin.pedidos') }}">
+    <h1 class="vintage-text mt-5">Pedidos Realizados</h1>
+    {{-- <form method="post" action="{{ route('admin.pedidos') }}">
         @csrf
 
         <div class="row">
@@ -101,7 +110,7 @@
                 <button type="submit" class="vintage-button">Filtrar</button>
             </div>
         </div>
-    </form>
+    </form> --}}
 
     <hr>
 
@@ -110,6 +119,7 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>nombre</th>
                     <th>Total a Pagar</th>
                     <th>Fecha del Pedido</th>
                     <th>Estado</th>
@@ -125,7 +135,8 @@
                 @foreach ($pedidos as $pedido)
                 <tr>
                     <td>{{ $pedido->id_pedido }}</td>
-                    <td>{{ $pedido->total_pagar }}</td>
+                    <td>{{ $pedido->nombre_cliente }}</td>
+                    <td>${{ $pedido->total_pagar }}</td>
                     <td>{{ $pedido->fecha_pedido }}</td>
                      
                     <td>
@@ -175,11 +186,56 @@
                 @endforeach
                
                 <tr>
-                    <td class="vintage-button">Total</td>
-                    <td class="vintage-button">{{ $totalfinal }}</td>
+                    <td class="">Total</td>
+                    <td class="">${{ $totalfinal }} </td>
                 </tr>
+               
             </tbody>
         </table>
-    </div>
+
+        <br>
+       
+        <div class="text-center">
+            <a type="button" id="cambiarEstadosButton" class="btn btn-warning" onclick="mostrarAlerta()">Finalizar Ventas en Evento</a>
+            <a href="#" onclick="window.print()" class="btn btn-primary btn-sm">Guardar Informe</a>
+        </div>
+        
+        
+
+        <br>
+    </div> 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function mostrarAlerta() {
+
+        Swal.fire({
+            title: '¿Finalizar Ventas en Evento?',
+            text: 'Esto eliminará todos los pedidos. ¿Deseas continuar?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, Finalizar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Aquí puedes poner la lógica para eliminar los registros
+                window.location.href = "{{ route('borrar') }}";
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                // El usuario canceló la operación
+                Swal.fire('Operación cancelada', '', 'error');
+            }
+        });
+
+
+    }
+</script>
+
+
+
+
+
+
+
+    
 @endsection
