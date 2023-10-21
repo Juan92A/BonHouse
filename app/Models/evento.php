@@ -13,6 +13,9 @@ class Evento extends Model
 
     protected $fillable = [
         'total_pagar',
+        'sub_total',
+        'descuento',
+        'porcentaje_descuento',
         'fecha_pedido',
         'id_estado_pedido',
         'id_usuario',
@@ -30,6 +33,9 @@ class Evento extends Model
         try {
             $evento = new Evento([
                 'total_pagar' => $this->total_pagar,
+                'sub_total' => $this->sub_total,
+                'descuento' => $this->sub_total,
+                'porcentaje_descuento' => $this->porcentaje_descuento,
                 'fecha_pedido' => $this->fecha_pedido,
                 'id_estado_pedido' => $this->id_estado_pedido,
                 'id_usuario' => $this->id_usuario,

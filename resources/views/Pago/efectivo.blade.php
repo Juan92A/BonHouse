@@ -131,6 +131,8 @@
                                     <tbody>
                                         @php
                                         $total = 0;
+                                        $subbTotal = 0;
+
                                         @endphp
                                 
                                         @foreach ($carrito as $item)
@@ -150,11 +152,23 @@
                                         @endforeach
                                     </tbody>
                                     <tfoot>
-                                        <tr>
-                                            <td colspan="3" class="text-right font-weight-bold">TOTAL A PAGAR:</td>
-                                            <td class="font-weight-bold">${{ number_format($total, 2) }}</td>
-                                            <input hidden  name="total_pagar" value="{{ number_format($total, 2) }}">
-                                        </tr>
+                                    @if($tipoventa == 1)
+                                    <tr>
+                                        <td colspan="3" class="text-right font-weight-bold">Sub total:</td>
+                                        <td class="font-weight-bold" id="subtotal-row">$0.00</td>
+                                        <input hidden name="sub_total" value="{{ number_format($total, 2) }}">
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" class="text-right font-weight-bold">Descuento:</td>
+                                        <td class="font-weight-bold" id="descuento-row">-$0.00</td>
+                                        <input hidden name="descuento" value="$0.00">   
+                                    </tr>
+                                    @endif
+                                    <tr>
+                                        <td colspan="3" class="text-right font-weight-bold">TOTAL A PAGAR:</td>
+                                        <td class="font-weight-bold" id="total-a-pagar-row">$0.00</td>
+                                        <input hidden name="total_pagar" value="{{ number_format($total, 2) }}">
+                                    </tr>
                                     </tfoot>
                                 </table>
                             </div>
@@ -177,8 +191,19 @@
                             <label for="cantidad_personas" class="form-label">Cantidad de personas:</label>
                             <input type="number" class="form-control" id="cantidad_personas"  pattern="^[1-9]\d*$" min="1" required   name="cantidad_personas" required  oninput="this.setCustomValidity('')">
                         </div>
-                
+                        <div class="mb-3 col-md-4">
+                            <label for="descuento" class="form-label">Porcentaje de descuento:</label>
+                            <input type="number" class="form-control" id="descuento"  pattern="^[1-9]\d*$" min="1" max="100"   name="porcentaje_descuento" required >
+                        </div>
                     
+                      
+                    </div>
+                    <div class="row">
+                            <div class="mb-3 col-md-4">
+                            <label for="email" class="form-label">Correo electrónico:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com">
+                        </div>
+
                         <div class="mb-3 col-md-4">
                             <label for="telefono" class="form-label">Teléfono:</label>
                             <input type="tel" class="form-control" id="telefono" name="telefono" required>
@@ -188,10 +213,7 @@
                             <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" required>
                         </div>
                     </div>
-                    <div class="mb-3">
-                            <label for="email" class="form-label">Correo electrónico:</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com">
-                        </div>
+                  
                 
                     @endif
                 
@@ -216,7 +238,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('formulario_pedido').addEventListener('submit', function(event) {
                 var cantidadPersonas = document.getElementById('cantidad_personas').value;
+               
                 
+
 
                 if (cantidadPersonas < 1) {
                     alert('La cantidad de personas debe ser mayor a 0.');
@@ -226,12 +250,13 @@
 
                     ////////Actualizacion en inputs
             var inputs = document.querySelectorAll('.cantidad-input');
-    inputs.forEach(function(input) {
-        input.addEventListener('change', function() {
+            inputs.forEach(function(input) {
+            input.addEventListener('change', function() {
             var row = this.closest('tr');
             var cantidadInput = this;
             var precioUnitarioElement = row.querySelector('.precioU');
             var precioTotalElement = row.querySelector('td:last-child'); // Último <td> en la fila
+            var descuentoRow = document.getElementById('descuento-row');
 
             var cantidad = parseFloat(cantidadInput.value);
             var precioUnitario = parseFloat(precioUnitarioElement.textContent.replace('$', '').trim());
@@ -246,22 +271,62 @@
                 // precioTotalElements.forEach(function(element) {
                 //       total += parseFloat(element.textContent.replace('$', ''));
             //});
+            @if($tipoventa == 1)
+            var totalDescuento = calcularDescuento();
+            descuentoRow.textContent = "-$" + totalDescuento.toFixed(2);
+            document.querySelector('input[name="descuento"]').value = totalDescuento.toFixed(2);
 
-            var totalPagar = calcularTotalPagar();
-                document.querySelector('tfoot td:last-child').innerText = "$" + totalPagar.toFixed(2);
-                document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
+           @endif      
+            var subtotal = calcularSubTotal();
+                        var totalPagar = calcularTotalPagar();
+                        @if($tipoventa == 1)
+                        document.getElementById('subtotal-row').textContent = "$" + subtotal.toFixed(2);
+                        document.querySelector('input[name="sub_total"]').value = subtotal.toFixed(2);               
+                @endif
+                        document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);                        
+                        document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
                 });
             });
 
+            @if($tipoventa == 1)
+                 var porcentaje = document.getElementById('descuento');
 
-                    function actualizarTabla() {
-                        var cantidadPersonas = parseInt(document.getElementById('cantidad_personas').value);
+                porcentaje.addEventListener('change', function(event) {
+                    var descuento = parseFloat(porcentaje.value);
+                    if(descuento <0 || descuento >100){
+                        document.querySelector('input[name="descuento"]').value = 0;
+
+                        alert("Por favor ingrese un descuento entre 1 y 100");
+                    event.preventDefault(); // Evita que se envíe el formulario
+
+                    }else{
+                        var descuentoRow = document.getElementById('descuento-row');
                     
+                    // Calcular el descuento y actualizar la fila de "Descuento"
+                    var totalDescuento = calcularDescuento();
+                    descuentoRow.textContent = "-$" + totalDescuento.toFixed(2);
+
+                    // Luego, recalcular el Subtotal y el Total a Pagar
+                    var subtotal = calcularSubTotal();
+                    var totalPagar = calcularTotalPagar();
+
+                    document.getElementById('subtotal-row').textContent = "$" + subtotal.toFixed(2);
+                    document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);
+                    document.querySelector('input[name="descuento"]').value = totalDescuento.toFixed(2);
+                    document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
+                    document.querySelector('input[name="sub_total"]').value = subtotal.toFixed(2);
+                    }
+                });
+                @endif
+              function actualizarTabla() {
+                        var cantidadPersonas = parseInt(document.getElementById('cantidad_personas').value);
                         // Establecer el valor de "Cantidad de Personas" en todos los campos de entrada
                         var cantidades = document.querySelectorAll('.cantidad-input');
+                        var descuentoRow = document.getElementById('descuento-row');
                         cantidades.forEach(function(input) {
                             input.value = cantidadPersonas;
-                        });                        
+                        });  
+
                         if (cantidadPersonas < 1) {
                                 alert('La cantidad de personas debe ser mayor a 0.');
                                 document.getElementById('cantidad_personas').value =0;
@@ -281,15 +346,25 @@
                         });
 
                         // Actualizar el total a pagar
+                        var subtotal = calcularSubTotal();
                         var totalPagar = calcularTotalPagar();
-                        document.querySelector('tfoot td:last-child').innerText = "$" + totalPagar.toFixed(2);
+                        @if($tipoventa == 1)
+                         var totalDescuento = calcularDescuento();
+                    descuentoRow.textContent = "-$" + totalDescuento.toFixed(2);
+
+                        document.querySelector('input[name="descuento"]').value = totalDescuento.toFixed(2);
+
+                          @endif
+             
+                        document.getElementById('subtotal-row').textContent = "$" + subtotal.toFixed(2);
+                        document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);
                         document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
+                        document.querySelector('input[name="sub_total"]').value = subtotal.toFixed(2);
                         }                    
                         
                     }
 
-
-            function calcularTotalPagar() {
+            function calcularSubTotal() {
                 var totalPagar = 0;
 
                 // Calcular el total a pagar sumando los precios totales de cada producto
@@ -297,12 +372,43 @@
                     var precioTotal = parseFloat(row.cells[3].innerText.replace('$', ''));
                     totalPagar += precioTotal;
                 });
+                totalPagar = totalPagar;    
+                return totalPagar;
+            }  
+             @if($tipoventa == 1)
 
+            function  calcularDescuento  () {
+                var totalDescuento = 0;
+                var descuento = porcentaje.value;
+                // Calcular el total a pagar sumando los precios totales de cada producto
+                document.querySelectorAll('tbody tr').forEach(function(row) {
+                    var precioTotal = parseFloat(row.cells[3].innerText.replace('$', ''));
+                    totalDescuento += precioTotal;
+                });
+                totalDescuento = totalDescuento*(descuento/100);
+                return totalDescuento;
+            } 
+            @endif
+            function calcularTotalPagar() {
+                var totalPagar = 0;
+               @if($tipoventa == 1)
+                var descuento = porcentaje.value;
+                @endif
+                // Calcular el total a pagar sumando los precios totales de cada producto
+                document.querySelectorAll('tbody tr').forEach(function(row) {
+                    var precioTotal = parseFloat(row.cells[3].innerText.replace('$', ''));
+                    totalPagar += precioTotal;
+                });
+                @if($tipoventa == 1)
+                totalPagar = totalPagar -calcularDescuento();   
+                @endif
+                
                 return totalPagar;
             }
-
+            @if($tipoventa == 1)
             // Agregar un evento al campo de cantidad de personas para actualizar la tabla
             document.getElementById('cantidad_personas').addEventListener('change', actualizarTabla);
+            @endif
         });
         
     </script>

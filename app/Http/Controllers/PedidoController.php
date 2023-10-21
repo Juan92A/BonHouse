@@ -34,11 +34,10 @@ namespace App\Http\Controllers;
                 $detallePedido = new DetallePedido();
                 $detallePedido->id_pedido = $pedido->id;
                 $detallePedido->id_producto = $item['producto']->id_producto;
-                $detallePedido->cantidad = $item['cantidad']; // Asignar la cantidad del producto del carrito
-
+                $detallePedido->cantidad = $request->input('cantidad')[$item['producto']->id_producto];; // Asignar la cantidad del producto del carrito
+                
                 $detallePedido->save(); // Guardar el detalle de pedido en la base de datos
             }
-
             // Vaciar el carrito
             $request->session()->forget('carrito');
 
@@ -125,6 +124,9 @@ namespace App\Http\Controllers;
             // Crear un nuevo Pedido
             $evento = new Evento();
             $evento->total_pagar = $request->input('total_pagar');
+            $evento->descuento = $request->input('descuento');
+            $evento->sub_total = $request->input('sub_total');
+            $evento->porcentaje_descuento = $request->input('porcentaje_descuento');
             $evento->fecha_pedido = now();
             $evento->id_usuario = auth()->user()->id;
             $evento->id_estado_pedido = $request->input('id_estado_pedido');
@@ -133,6 +135,7 @@ namespace App\Http\Controllers;
             $evento->fecha_evento = $request->input('fecha_evento');
             $evento->telefono = $request->input('telefono');            
             $evento->email = $request->input('email');
+
             $evento->save();
            
            
