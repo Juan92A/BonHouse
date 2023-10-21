@@ -117,6 +117,7 @@ namespace App\Http\Controllers;
             
             $carrito = $request->session()->get('carritoEvento', []);
             
+           
             // Itera sobre los elementos del carrito
           
             // Actualiza el carrito en la sesión
@@ -133,21 +134,17 @@ namespace App\Http\Controllers;
             $evento->telefono = $request->input('telefono');            
             $evento->email = $request->input('email');
             $evento->save();
-          
-            foreach ($carrito as &$item) {
-            // Incrementa la cantidad del producto
-                    $item['cantidad'] += $request->input('cantidad_personas');
-               
-            }
-            
-            // Crear los detalles de pedido para cada producto en el carrito
+           
+           
+       
+                // Crear los detalles de pedido para cada producto en el carrito
             foreach ($carrito as $item) {
                 $DetalleEvento = new DetalleEvento();
                 $DetalleEvento->id_pedido = $evento->id;
                 $DetalleEvento->id_producto = $item['producto']->id_producto;
-                $DetalleEvento->cantidad_personas = $item['cantidad']; // Asignar la cantidad del producto del carrito
-
-                $DetalleEvento->save(); // Guardar el detalle de pedido en la base de datos
+                $DetalleEvento->cantidad_personas = $request->input('cantidad')[$item['producto']->id_producto]; // Obtener la cantidad de personas
+                 //dd($request->input('cantidad')[$item['producto']->id_producto]); // Obtener la cantidad de personas
+                $DetalleEvento->save();
             }
 
             // Vaciar el carrito
