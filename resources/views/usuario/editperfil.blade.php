@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-3" title="Guardar cambios">
+                        <button type="submit" class="btn btn-primary mt-3" title="Guardar cambios"  onclick="mostrarAlerta()">
                             Guardar Cambios <i class="fa fa-save"></i>
                         </button>
                     </div>
@@ -39,4 +39,22 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+   function mostrarAlerta() {
+        Swal.fire({
+            title: 'Datos actualizados',
+            text: 'Datos actualizados correctamente',
+            icon: 'success',
+            showConfirmButton: false
+        });
+
+        // Opcionalmente, puedes agregar un temporizador para cerrar automáticamente la alerta
+        setTimeout(function() {
+            Swal.close();
+        }, 2000); // Cerrar después de 2 segundos (ajusta el valor a tu preferencia)
+    }
+</script>
 @endsection

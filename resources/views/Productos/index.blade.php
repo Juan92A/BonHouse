@@ -116,7 +116,7 @@ t: bold; /* Texto del pie de tabla en negrita */
             <form action="{{ route('producto.editar') }}">
               @csrf
               <input type="hidden" name="id_producto" value="{{ $producto->id_producto }}">
-              <button type="submit" class="vintage-button"><i class="fas fa-edit"></i> Editar</button>
+              <button type="submit" class="vintage-button"><i class="fas fa-edit" onclick="mostrarAlerta()"></i> Editar</button>
             </form>
           </td>
         </tr>
@@ -125,4 +125,17 @@ t: bold; /* Texto del pie de tabla en negrita */
     </table>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function mostrarAlerta(estado) {
+        const mensaje = estado === 1 ? 'Categoría cambiada a No Disponible' : 'Categoría cambiada a Disponible';
+        Swal.fire({
+            title: 'Estado de Categoría',
+            text: mensaje,
+            icon: 'success'
+        });
+    }
+</script>
+
 @endsection

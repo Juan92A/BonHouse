@@ -169,7 +169,7 @@ namespace App\Http\Controllers;
 
         function mostrarEstadoCategoria($categoria) {
             $estado = $categoria->estado; // Acceso a la propiedad "estado" del modelo
-            $id_categoria = $categoria->id_categoria; // Acceso a la propiedad "id_categoria" del modelo
+            $id_categoria = $categoria->id_categoria; // Acceso a la propiedad "id_categoria" del modelo
             $buttonText = ($estado == 1) ? 'Disponible' : 'No Disponible';
             $buttonClass = ($estado == 1) ? 'btn-success' : 'btn-secondary';
             
@@ -178,14 +178,12 @@ namespace App\Http\Controllers;
                 <input type="hidden" name="_token" value="'.csrf_token().'">
                 <input type="hidden" name="id_categoria" value="'.$id_categoria.'">
                 <input type="hidden" name="estado" value="'.($estado == 1 ? 2 : 1).'">
-                <button type="submit" class="btn '.$buttonClass.'">'.$buttonText.'</button>
+                <button type="submit" class="btn '.$buttonClass.'" onclick="mostrarAlerta('.$estado.')">'.$buttonText.'</button>
             </form>
-        ';
+            ';
         
-            
             return $html;
-        }
-
+        }        
 
         public function detallePedido(Request $request)
         {

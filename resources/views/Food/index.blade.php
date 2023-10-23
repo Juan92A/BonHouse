@@ -68,7 +68,7 @@
                         <div style="display: flex; align-items: center;">
                            
                             
-                            <button type="submit">Agregar al carrito</button>
+                            <button type="submit" onclick="mostrarAlerta()">Agregar al carrito</button>
                         </div>
                     </div>
                 </form>
@@ -80,4 +80,23 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+   function mostrarAlerta() {
+        Swal.fire({
+            title: 'Se ha agregado al carrito',
+            text: 'El producto seleccionado se ha agregado al carrito',
+            icon: 'success',
+            showConfirmButton: false
+        });
+
+        // Opcionalmente, puedes agregar un temporizador para cerrar automáticamente la alerta
+        setTimeout(function() {
+            Swal.close();
+        }, 2000); // Cerrar después de 2 segundos (ajusta el valor a tu preferencia)
+    }
+</script>
 @endsection

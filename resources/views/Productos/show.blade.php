@@ -70,8 +70,25 @@
                 <input type="file" class="form-control" id="image_url" name="image_url" accept="image/*">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-4 vintage-button"><i class="fas fa-sync-alt"></i> Actualizar</button>
+        <button type="submit" class="btn btn-primary mt-4 vintage-button" onclick="mostrarAlerta()"><i class="fas fa-sync-alt"></i> Actualizar</button>
     </form>
     <br>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+   function mostrarAlerta() {
+        Swal.fire({
+            title: 'Producto actualizado',
+            text: 'Producto actualizado correctamente',
+            icon: 'success',
+            showConfirmButton: false
+        });
+
+        // Opcionalmente, puedes agregar un temporizador para cerrar automáticamente la alerta
+        setTimeout(function() {
+            Swal.close();
+        }, 2000); // Cerrar después de 2 segundos (ajusta el valor a tu preferencia)
+    }
+</script>
 @endsection
