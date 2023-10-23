@@ -56,7 +56,7 @@
                             </div>
                        
                             
-                            <button type="submit">Agregar al carrito</button>
+                            <button type="submit" onclick="mostrarAlerta()">Agregar al carrito</button>
                         </div>
                     </div>
                 </form>
