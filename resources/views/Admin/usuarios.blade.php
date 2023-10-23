@@ -65,14 +65,16 @@
                             <div class="form-group">
                                 @auth
                                 @if (auth()->user()->name != $user->name)
+
                                     <select name="role" class="form-select" onchange="this.form.submit()">
                                         <option value="{{ $user->role }}">
-                                            {{ $user->role == 1 ? 'Administrador' : 'Usuario' }}
+                                            {{ $user->rol == 1 ? 'Administrador' : 'Usuario' }}
                                         </option>
-                                        @if ($user->role === 1)
-                                        <option value="2" {{ $user->role == 2 ? 'selected' : '' }}>Usuario</option>
+                                        @if ($user->rol === 1)
+                                        
+                                        <option value="2" {{ $user->rol == 2 ? 'selected' : '' }}>Usuario</option>
                                         @else
-                                        <option value="1" {{ $user->role == 1 ? 'selected' : '' }}>Administrador</option>
+                                        <option value="1" {{ $user->roe == 1 ? 'selected' : '' }}>Administrador</option>
                                         @endif
                                     </select>
                                 @else
