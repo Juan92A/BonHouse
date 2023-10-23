@@ -65,17 +65,15 @@
                             <div class="form-group">
                                 <?php if(auth()->guard()->check()): ?>
                                 <?php if(auth()->user()->name != $user->name): ?>
-
-                                    <select name="role" class="form-select" onchange="this.form.submit()">
-                                        <option value="<?php echo e($user->role); ?>">
+                                    <select name="rol" class="form-select" onchange="this.form.submit()">
+                                        <option value="<?php echo e($user->rol); ?>">
                                             <?php echo e($user->rol == 1 ? 'Administrador' : 'Usuario'); ?>
 
                                         </option>
                                         <?php if($user->rol === 1): ?>
-                                        
                                         <option value="2" <?php echo e($user->rol == 2 ? 'selected' : ''); ?>>Usuario</option>
                                         <?php else: ?>
-                                        <option value="1" <?php echo e($user->roe == 1 ? 'selected' : ''); ?>>Administrador</option>
+                                        <option value="1" <?php echo e($user->rol == 1 ? 'selected' : ''); ?>>Administrador</option>
                                         <?php endif; ?>
                                     </select>
                                 <?php else: ?>

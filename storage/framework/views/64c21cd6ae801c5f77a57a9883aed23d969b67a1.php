@@ -193,7 +193,17 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-expanded="false">Eventos</a>
                         <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="/eventos"><i class="fas fa-calendar-plus"></i> Crear eventos</a></li>
+                            <li>
+
+                                <a class="nav-link" href="/eventos">
+                                    <i class="fa-solid fa-cart-shopping"></i> Crear eventos
+                                    <?php if(session()->has('carritoEvento')): ?>
+                                    <span class="badge bg-danger"><?php echo e(count(session('carritoEvento'))); ?></span>
+                                    <?php endif; ?>
+                                </a>
+
+
+                            </li>
                             <li><a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Visualizar eventos</a>
                             </li>
                         </ul>
