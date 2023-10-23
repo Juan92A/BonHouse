@@ -44,8 +44,26 @@
                 <option value="2" {{ ($categoria->estado == 2) ? 'selected' : '' }}>No disponible</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary mt-4 vintage-button">Actualizar</button>
+        <button type="submit" class="btn btn-primary mt-4 vintage-button" onclick="mostrarAlerta()">Actualizar</button>
     </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+   function mostrarAlerta() {
+        Swal.fire({
+            title: 'Categoría actualizada',
+            text: 'Categoría actualizada correctamente',
+            icon: 'success',
+            showConfirmButton: false
+        });
+
+        // Opcionalmente, puedes agregar un temporizador para cerrar automáticamente la alerta
+        setTimeout(function() {
+            Swal.close();
+        }, 2000); // Cerrar después de 2 segundos (ajusta el valor a tu preferencia)
+    }
+</script>
+
 @endsection
 

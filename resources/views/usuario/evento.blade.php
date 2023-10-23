@@ -1,71 +1,154 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1 class="pt-3" style="color: #c43f3f;">Mis pedidos</h1>
+<div style="
+background: #e2d9c2;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+height: 100%;
+margin: 0%;
+">
+    <style>
+        .vintage-text {
+            background-color: #f5e8c0;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 44px;
+            text-align: center;
+        }
 
-    <hr>
-    @if(session('success_pedido'))
+        .vintage-button {
+            background-color: #f5e8c0;
+            color: #964f19;
+            border: 2px solid #964f19;
+            font-family: 'Courier New', monospace;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .vintage-button:hover {
+            background-color: #964f19;
+            color: #f5e8c0;
+        }
+
+        .vintage-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .vintage-table th,
+        .vintage-table td {
+            border: 1px solid #964f19;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .vintage-table thead {
+            background-color: #f5e8c0;
+        }
+
+        .vintage-table th {
+            background-color: #964f19;
+            color: #f5e8c0;
+        }
+
+        .vintage-table tbody tr:nth-child(even) {
+            background-color: #f5e8c0;
+        }
+
+        .vintage-table tbody tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        .vintage-table tfoot {
+            background-color: #f5e8c0;
+        }
+
+        .vintage-table tfoot td {
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="container">
+        @if(session('success_pedido'))
         <div class="alert alert-success" role="alert">
             {{ session('success_pedido') }}
         </div>
-    @endif
+        @endif
 
-    <div class="row">
-        <form class="mb-5" method="post" action="{{ route('usuario.pedidos') }}">
-            @csrf
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="fecha_pedido" class="mb-2">Fecha:</label>
-                    <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido" >
+        <div class="row">
+            <form class="mb-5" method="post" action="{{ route('usuario.pedidos') }}">
+                @csrf
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="fecha_pedido" class="mb-2">Fecha:</label>
+                        <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="id_estado" class="mb-2">Estado:</label>
+                        <select id="id_estado" name="id_estado" class="form-control">
+                            <option value="">Todos</option>
+                            <option value="1">En proceso</option>
+                            <option value="2">Finalizado</option>
+                            <option value="3">Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4 mt-4">
+                        <button type="submit" class="btn btn-primary vintage-button">Filtrar Pedidos</button>
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="id_estado" class="mb-2">Estado:</label>
-                    <select id="id_estado" name="id_estado" class="form-control">
-                        <option value="">Todos</option>
-                        <option value="1">En proceso</option>
-                        <option value="2">Finalizado</option>
-                        <option value="3">Cancelado</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4  mt-4">
-                    <button type="submit" class="btn btn-primary">Filtrar Pedidos</button>
-                </div>
-            </div>
-        </form>
+            </form>
 
-        <div class="col-md-12">
-            @if(empty($pedidos))
+            <div class="col-md-12">
+                @if(empty($pedidos))
                 <p>No tienes pedidos activos en este momento</p>
-            @else
-                <table class="table table-striped table-bordered">
+                @else
+                <table class="vintage-table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Cliente</th>
                             <th scope="col">Fecha</th>
+                            <th scope="col">Descuento</th>
+                            <th scope="col">Total</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Ver</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($pedidos as $pedido)
-                            <tr>
-                                <td>{{ $pedido->id_pedido }}</td>
-                                <td>{{ $pedido->fecha_pedido }}</td>
-                                <td>{{ $pedido->id_estado_pedido }}</td>
-                                <td>
-                                    <form method="post" action="{{ route('detalle.evento') }}">
-                                        @csrf
-                                        <input type="hidden" name="id_pedido" value="{{ $pedido->id_pedido }}">
-                                        <button type="submit" class="btn btn-info">Ver Detalle</button>
-                                    </form>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{ $pedido->id_pedido }}</td>
+                            <td>{{ $pedido->nombre_cliente }}</td>
+                            <td>{{ $pedido->fecha_pedido }}</td>
+                            <td>{{ $pedido->porcentaje_descuento }}%</td>
+                            <td>{{ $pedido->sub_total }}</td>
+                            <td>{{ $pedido->id_estado_pedido }}</td>
+                            <td>
+                                <form method="post" action="{{ route('detalle.evento') }}">
+                                    @csrf
+                                    <input type="hidden" name="id_pedido" value="{{ $pedido->id_pedido }}">
+                                    <button type="submit" class="btn btn-info vintage-button">Ver Detalle</button>
+                                </form>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
-            @endif
+                @endif
+            </div>
         </div>
+        <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
     </div>
 </div>
 @endsection

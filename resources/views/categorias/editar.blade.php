@@ -116,4 +116,6 @@ t: bold; /* Texto del pie de tabla en negrita */
         </tbody>
     </table>
 </div>
+
+
 @endsection
