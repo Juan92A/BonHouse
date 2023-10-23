@@ -115,7 +115,8 @@ namespace App\Http\Controllers;
          }
          public function updateRole(Request $request, User $user)
         {
-            $user->update(['rol' => $request->role]);
+            $user->update(['rol' => $request->rol]);
+           
             return redirect()->back();
         }
 

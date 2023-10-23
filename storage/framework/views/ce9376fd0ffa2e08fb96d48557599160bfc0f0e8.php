@@ -1,7 +1,36 @@
 
+
 <?php $__env->startSection('content'); ?>
+<style>
+    .vintage-text {
+        background-color: #f5e8c0;
+        font-family: 'Courier New', monospace;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 44px;
+        text-align: center;
+    }
+
+    .vintage-button {
+        background-color: #f5e8c0;
+        color: #964f19;
+        border: 2px solid #964f19;
+        font-family: 'Courier New', monospace;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .vintage-button:hover {
+        background-color: #964f19;
+        color: #f5e8c0;
+    }
+</style>
+
 <div class="container">
-    <h1 class="mt-5">
+    <h1 class="mt-5 vintage-text">
         <i class="fas fa-plus-circle"></i> Guardar Promoción
     </h1>
     <form class="mt-5" action="<?php echo e(route('productos.create')); ?>" method="post" enctype="multipart/form-data">
@@ -9,7 +38,8 @@
         <input type="hidden" name="es_promocion" value="1">
         <div class="form-group row mb-3">
             <label for="titulo" class="col-sm-2 col-form-label">
-                <i class="fas fa-signature"></i> Título:</label>
+                <i class="fas fa-signature"></i> Título:
+            </label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="titulo" name="nombre" required>
             </div>
@@ -33,9 +63,11 @@
                 <input type="number" class="form-control" id="precio" name="precio" step="0.01" min="0" required>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-plus-circle"></i> Guardar
-        promoción</button>
+        <button type="submit" class="btn btn-primary mt-3 vintage-button">
+            <i class="fas fa-plus-circle"></i> Guardar Promoción
+        </button>
     </form>
 </div>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/promociones/create.blade.php ENDPATH**/ ?>

@@ -206,9 +206,10 @@
                         </div>
 
                         <div class="mb-3 col-md-4">
-                            <label for="telefono" class="form-label">Teléfono:</label>
-                            <input type="tel" class="form-control" id="telefono" name="telefono" required>
-                        </div>
+    <label for="telefono" class="form-label">Teléfono:</label>
+    <input type="tel" class="form-control" id="telefono" name="telefono" required pattern="\d{4}-\d{4}" title="Ingresa el teléfono en el formato 0000-0000">
+</div>
+
                         <div class="mb-3 col-md-4">
                             <label for="fecha_evento" class="form-label">Fecha del evento:</label>
                             <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" required>
