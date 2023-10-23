@@ -158,7 +158,7 @@ namespace App\Http\Controllers;
                 $request->session()->flash('error_pedido', 'No se pudo procesar el pedido, por favor inténtelo de nuevo.');
                 return redirect()->route('pago.efectivo');
             } else {
-                $request->session()->flash('success_pedido', '¡El pedido se ha creado exitosamente!');
+                $request->session()->flash('success_pedido', '¡El evento se ha creado exitosamente!');
                 $id_usuario = auth()->user()->id;
                 $fecha = $request->input('fecha_pedido', date('Y-m-d'));
                 $id_estado = $request->input('id_estado', '');
