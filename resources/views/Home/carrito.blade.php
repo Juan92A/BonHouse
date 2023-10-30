@@ -142,7 +142,7 @@ margin:0%
                     </table>
                 </div>
                 <div class="row align-items-center">
-                    <form action="{{ route('pago.pagar') }}" method="POST">
+                    <form action="{{ route('pago.pagar') }}" method="POST" id="formularioPedido">
                         @csrf
                         <div class="d-flex justify-content-center align-items-center flex-column">
                             <div class="my-3">
@@ -150,7 +150,7 @@ margin:0%
                             </div>
                         </div>
                         <div class="text-center mt-4">
-                            <button class="btn btn-success" type="submit">Continuar Pedido</button>
+                            <button class="btn btn-success" type="submit" id="continuarPedidoBtn">Continuar Pedido</button>
                         </div>
                     </form>
                 </div>
@@ -158,6 +158,27 @@ margin:0%
         </div>
         
     </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Obten el formulario y el botón de continuar
+            var formularioPedido = document.getElementById("formularioPedido");
+            var continuarPedidoBtn = document.getElementById("continuarPedidoBtn");
+    
+            // Agrega un controlador de eventos al formulario cuando se envíe
+            formularioPedido.addEventListener("submit", function(event) {
+                // Valida si la tabla está vacía
+                if (document.querySelectorAll('.vintage-table tbody tr').length === 0) {
+                    alert("El carrito está vacío. Agrega productos antes de continuar.");
+                    event.preventDefault(); // Detiene el envío del formulario
+                }
+            });
+        });
+    </script>
+    
+
     @endsection
     
 </div>
+
