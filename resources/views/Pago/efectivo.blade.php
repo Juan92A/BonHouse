@@ -193,7 +193,7 @@
                         </div>
                         <div class="mb-3 col-md-4">
                             <label for="descuento" class="form-label">Porcentaje de descuento:</label>
-                            <input type="number" class="form-control" id="descuento"  pattern="^[1-9]\d*$" min="1" max="100"   name="porcentaje_descuento" required >
+                            <input type="number" class="form-control" id="descuento"  pattern="^[1-9]\d*$" min="0" max="100"   name="porcentaje_descuento"  >
                         </div>
                     
                       
@@ -205,9 +205,9 @@
                         </div>
 
                         <div class="mb-3 col-md-4">
-    <label for="telefono" class="form-label">Teléfono:</label>
-    <input type="tel" class="form-control" id="telefono" name="telefono" required pattern="\d{4}-\d{4}" title="Ingresa el teléfono en el formato 0000-0000">
-</div>
+                        <label for="telefono" class="form-label">Teléfono:</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" required pattern="\d{4}-\d{4}" title="Ingresa el teléfono en el formato 0000-0000">
+                        </div>
 
                         <div class="mb-3 col-md-4">
                             <label for="fecha_evento" class="form-label">Fecha del evento:</label>

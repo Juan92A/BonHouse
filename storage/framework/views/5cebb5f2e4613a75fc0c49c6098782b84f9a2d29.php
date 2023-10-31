@@ -117,7 +117,7 @@ t: bold; /* Texto del pie de tabla en negrita */
             <form action="<?php echo e(route('producto.editar')); ?>">
               <?php echo csrf_field(); ?>
               <input type="hidden" name="id_producto" value="<?php echo e($producto->id_producto); ?>">
-              <button type="submit" class="vintage-button"><i class="fas fa-edit"></i> Editar</button>
+              <button type="submit" class="vintage-button"><i class="fas fa-edit" onclick="mostrarAlerta()"></i> Editar</button>
             </form>
           </td>
         </tr>
@@ -126,6 +126,19 @@ t: bold; /* Texto del pie de tabla en negrita */
     </table>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function mostrarAlerta(estado) {
+        const mensaje = estado === 1 ? 'Categoría cambiada a No Disponible' : 'Categoría cambiada a Disponible';
+        Swal.fire({
+            title: 'Estado de Categoría',
+            text: mensaje,
+            icon: 'success'
+        });
+    }
+</script>
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/productos/index.blade.php ENDPATH**/ ?>

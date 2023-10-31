@@ -116,7 +116,6 @@ namespace App\Http\Controllers;
         public function listUsers()
             {
                 $users = User::all();
-        
                 return view('Admin.usuarios', ['users' => $users]);
          }
          public function updateRole(Request $request, User $user)
