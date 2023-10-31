@@ -151,7 +151,7 @@ margin:0%
                                 </div>
                             </div>
                             <div class="row align-items-center">
-                                <form action="{{ route('pago.evento') }}" method="POST">
+                                <form action="{{ route('pago.evento') }}" method="POST" id="formularioPedido">
                                     @csrf
                                     <div class="d-flex justify-content-center align-items-center flex-column">
                                         <div class="my-3">
@@ -159,7 +159,7 @@ margin:0%
                                         </div>
                                     </div>
                                     <div class="text-center mt-4">
-                                        <button class="btn btn-success" type="submit">Continuar Pedido</button>
+                                        <button class="btn btn-success" type="submit" id="continuarPedidoBtn">Continuar Pedido</button>
                                     </div>
                                 </form>
                             </div>
@@ -171,4 +171,29 @@ margin:0%
         
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obten el formulario y el botón de continuar
+        var formularioPedido = document.getElementById("formularioPedido");
+        var continuarPedidoBtn = document.getElementById("continuarPedidoBtn");
+
+        // Agrega un controlador de eventos al formulario cuando se envíe
+        formularioPedido.addEventListener("submit", function(event) {
+            // Valida si la tabla está vacía
+            if (document.querySelectorAll('.vintage-table tbody tr').length === 0) {
+                Swal.fire({
+                    title: 'Vacio',
+                    text: 'No tiene productos agregados',
+                    icon: 'error',
+                    // showConfirmButton: false
+                });
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 @endsection

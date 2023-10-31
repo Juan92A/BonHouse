@@ -159,6 +159,7 @@ margin:0%
         
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -170,8 +171,13 @@ margin:0%
             formularioPedido.addEventListener("submit", function(event) {
                 // Valida si la tabla está vacía
                 if (document.querySelectorAll('.vintage-table tbody tr').length === 0) {
-                    alert("El carrito está vacío. Agrega productos antes de continuar.");
-                    event.preventDefault(); // Detiene el envío del formulario
+                    Swal.fire({
+                        title: 'Vacio',
+                        text: 'No tiene productos agregados',
+                        icon: 'error',
+                        // showConfirmButton: false
+                    });
+                    event.preventDefault();
                 }
             });
         });

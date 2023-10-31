@@ -201,7 +201,7 @@
                     <div class="row">
                             <div class="mb-3 col-md-4">
                             <label for="email" class="form-label">Correo electrónico:</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com" required>
                         </div>
 
                         <div class="mb-3 col-md-4">

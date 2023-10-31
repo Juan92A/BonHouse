@@ -75,6 +75,8 @@ margin: 0%;
         }
     </style>
 
+
+
     <div class="container">
         @if(session('success_pedido'))
         <div class="alert alert-success" role="alert">
@@ -82,7 +84,9 @@ margin: 0%;
         </div>
         @endif
 
-        <div class="row">
+        <h1 class="vintage-text mt-5">Eventos Realizados</h1>
+
+        {{-- <div class="row">
             <form class="mb-5" method="post" action="{{ route('usuario.pedidos') }}">
                 @csrf
                 <div class="row">
@@ -103,13 +107,13 @@ margin: 0%;
                         <button type="submit" class="btn btn-primary vintage-button">Filtrar Pedidos</button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
 
             <div class="col-md-12">
                 @if(empty($pedidos))
                 <p>No tienes pedidos activos en este momento</p>
                 @else
-                <table class="vintage-table table-striped table-bordered">
+                <table id="miTabla" class="vintage-table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
@@ -126,7 +130,7 @@ margin: 0%;
                         <tr>
                             <td>{{ $pedido->id_pedido }}</td>
                             <td>{{ $pedido->nombre_cliente }}</td>
-                            <td>{{ $pedido->fecha_pedido }}</td>
+                            <td>{{ $pedido->fecha_evento }}</td>
                             <td>{{ $pedido->porcentaje_descuento }}%</td>
                             <td>{{ $pedido->sub_total }}</td>
                             <td>{{ $pedido->id_estado_pedido }}</td>
@@ -151,4 +155,17 @@ margin: 0%;
                     <br>
     </div>
 </div>
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#miTabla').DataTable({
+            paging: true,  // Habilita la paginación
+            pageLength: 10, // Define la cantidad de filas por página
+        });
+    });
+</script>
+
+
 @endsection

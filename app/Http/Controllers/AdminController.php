@@ -20,18 +20,23 @@ namespace App\Http\Controllers;
 
         public function pedidos(Request $request)
         {
-            $fechaActual = now()->format('Y-m-d');
-            $fecha = $request->input('fecha_pedido', $fechaActual);
-            $id_estado = $request->input('id_estado');
+            $request->session()->flash('success_pedido', '¡El evento se ha creado exitosamente!');
+            $id_usuario = auth()->user()->id;
+            $fecha = $request->input('fecha_pedido', date('Y-m-d'));
+            $id_estado = $request->input('id_estado', '');
+
             
-            // Llamamos al modelo Pedido y creamos una instancia
-            $pedidoModel = new Pedido();
+
+
             
-            // Llamamos al método obtenerPedidosPorUsuario y pasamos la fecha y el ID de estado como argumentos
-            $pedidos = $pedidoModel->obtenerPedidosPorUsuario(auth()->user()->id, $fecha, $id_estado);
+        
+            $eventoModel = new evento();
+            $eventos = $eventoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
+
+        
             
-            // Enviamos los resultados a la vista
-            return view('Usuario.Pedido', ['pedidos' => $pedidos]);
+
+            return view('Usuario.evento', ['pedidos' => $eventos]);
         }    
 
         public function pedidosA(Request $request)

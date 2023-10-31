@@ -167,6 +167,7 @@ namespace App\Http\Controllers;
             
                 $eventoModel = new evento();
                 $eventos = $eventoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
+                
 
                 return view('Usuario.evento', ['pedidos' => $eventos]);
             }
