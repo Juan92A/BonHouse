@@ -72,6 +72,20 @@ class Categoria extends Model
             return null; // Devuelve un valor nulo en caso de error
         }
     }
+// Metodo para verificar existenncia categorias
+public static function existeCategoria($descripcion)
+{
+    try {
+        $count = DB::table('categorias as c')
+            ->where(DB::raw("upper(c.descripcion)"), 'like', DB::raw("upper('%$descripcion%')"))
+            ->count();
+
+        return $count;
+    } catch (\Exception $e) {
+        echo "Error: " . $e->getMessage();
+        return null; // Devuelve un valor nulo en caso de error
+    }
+}
 
     // Método para actualizar el estado de una categoría
     public static function actualizarEstado($id_categoria, $nuevo_estado)

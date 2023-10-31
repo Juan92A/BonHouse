@@ -99,12 +99,17 @@ namespace App\Http\Controllers;
                     }else{
                         dd("No hay imagen");
                     }
-
+                 
                     $descripcion = $request->input('descripcion');
-                    $estado = $request->input('estado');                    
-                    Categoria::agregarCategoria($descripcion, $estado, $image_url);     
-
-                        return redirect()->route('categorias.editar');
+                    $existeCategorria = Categoria::existeCategoria($descripcion);
+                    if($existeCategorria>0){
+                        return redirect()->route('categorias.create')->with('error', 'Ya existe una categoria con el nombre ingresado.');
+                    }else{
+                        $estado = $request->input('estado');                    
+                        Categoria::agregarCategoria($descripcion, $estado, $image_url);   
+                        return redirect()->route('categorias.editar')->with('succes', 'Categoría creada correctamente.');
+                    }
+                 
                 }
                
             }

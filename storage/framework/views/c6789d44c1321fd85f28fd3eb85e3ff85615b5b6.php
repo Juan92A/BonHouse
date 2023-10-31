@@ -117,6 +117,22 @@ t: bold; /* Texto del pie de tabla en negrita */
         </tbody>
     </table>
 </div>
-<?php $__env->stopSection(); ?>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    <?php if(session('succes')): ?>       
+        Swal.fire({
+            title: 'Categoría Creada',
+            text: '<?php echo e(session('succes')); ?>',
+            icon: 'success',
+            showConfirmButton: false
+        });
+        
+        setTimeout(function() {
+            Swal.close();
+        }, 2000); // Cerrar después de 2 segundos (ajusta el valor a tu preferencia)
+    <?php endif; ?>
+</script>
+<?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/Categorias/editar.blade.php ENDPATH**/ ?>

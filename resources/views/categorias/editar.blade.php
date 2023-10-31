@@ -117,5 +117,20 @@ t: bold; /* Texto del pie de tabla en negrita */
     </table>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script>
+    @if(session('succes'))       
+        Swal.fire({
+            title: 'Categoría Creada',
+            text: '{{ session('succes') }}',
+            icon: 'success',
+            showConfirmButton: false
+        });
+        
+        setTimeout(function() {
+            Swal.close();
+        }, 2000); // Cerrar después de 2 segundos (ajusta el valor a tu preferencia)
+    @endif
+</script>
 @endsection

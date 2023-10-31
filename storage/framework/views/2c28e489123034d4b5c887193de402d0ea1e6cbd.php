@@ -84,7 +84,7 @@ t: bold; /* Texto del pie de tabla en negrita */
     <form class="mt-4" method="post" action="<?php echo e(route('categorias.agregar')); ?>" enctype="multipart/form-data">
         <?php echo csrf_field(); ?>
         <div class="form-group">
-            <label for="descripcion">Descripción</label>
+            <label for="descripcion">Nombre categoría:</label>
             <input type="text" class="form-control" id="descripcion" name="descripcion" value="">
         </div>
         <div class="form-group">
@@ -100,7 +100,7 @@ t: bold; /* Texto del pie de tabla en negrita */
         </div>
         <div class="row">
             <div class="col mt-3">
-                <button type="submit" class="vintage-button" onclick="mostrarAlerta()">Agregar Categoría</button>
+                <button type="submit" class="vintage-button" >Agregar Categoría</button>
             </div>
             <div class="col ">
                 <img id="image_preview" src="#" alt="Preview" style="display: none; max-width: 100%; height: auto;">
@@ -112,19 +112,14 @@ t: bold; /* Texto del pie de tabla en negrita */
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    function mostrarAlerta() {
+    <?php if(session('error')): ?>       
         Swal.fire({
-            title: 'Categoría Creada',
-            text: 'Categoría creada correctamente',
-            icon: 'success',
-            showConfirmButton: false
+            title: 'Error',
+            text: '<?php echo e(session('error')); ?>',
+            icon: 'error',
+            showConfirmButton: true
         });
-
-        // Opcionalmente, puedes agregar un temporizador para cerrar automáticamente la alerta
-        setTimeout(function() {
-            Swal.close();
-        }, 2000); // Cerrar después de 2 segundos (ajusta el valor a tu preferencia)
-    }
+    <?php endif; ?>
 
     const imageInput = document.getElementById('image_url');
     const imagePreview = document.getElementById('image_preview');
