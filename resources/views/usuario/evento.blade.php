@@ -84,7 +84,7 @@ margin: 0%;
         </div>
         @endif
 
-        <h1 class="vintage-text mt-5">Eventos Realizados</h1>
+        <h1 class="vintage-text ">Eventos Realizados</h1>
 
         {{-- <div class="row">
             <form class="mb-5" method="post" action="{{ route('usuario.pedidos') }}">

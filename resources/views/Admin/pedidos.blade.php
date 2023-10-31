@@ -74,6 +74,16 @@
             background-color: #f5e8c0; /* Color de fondo para la fila de pie de tabla */
         }
 
+        .vintage-total2 {
+            font-size: 24px; /* Tamaño de fuente personalizado para el texto "Total" */
+            color: #964f19; /* Color del texto */
+        }
+
+        .vintage-amount2 {
+            font-size: 28px; /* Tamaño de fuente personalizado para el monto total */
+            color: #964f19; /* Color del texto */
+        }
+
         .vintage-table tfoot td {
             font-weigh
             
@@ -89,33 +99,12 @@ t: bold; /* Texto del pie de tabla en negrita */
     </style>
 
     <h1 class="vintage-text mt-5">Pedidos Realizados</h1>
-    {{-- <form method="post" action="{{ route('admin.pedidos') }}">
-        @csrf
 
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="fecha_pedido" class="mb-2">Fecha:</label>
-                <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido" >
-            </div>
-            <div class="form-group col-md-4">
-                <label for="id_estado" class="mb-2">Estado:</label>
-                <select id="id_estado" name="id_estado" class="form-control">
-                    <option value="">Todos</option>
-                    <option value="1">En proceso</option>
-                    <option value="2">Finalizado</option>
-                    <option value="3">Cancelado</option>
-                </select>
-            </div>
-            <div class="form-group col-md-4 mt-4">
-                <button type="submit" class="vintage-button">Filtrar</button>
-            </div>
-        </div>
-    </form> --}}
 
     <hr>
 
-    <div class="table-container">
-        <table class="vintage-table">
+    <div class="">
+        <table id="miTabla" class="vintage-table">
             <thead>
                 <tr>
                     <th>#</th>
@@ -123,9 +112,8 @@ t: bold; /* Texto del pie de tabla en negrita */
                     <th>Total a Pagar</th>
                     <th>Fecha del Pedido</th>
                     <th>Estado</th>
-                    <th>Ver</th>
+                    <th>Ver Productos</th>
                     <th>Modificar estado</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -185,18 +173,26 @@ t: bold; /* Texto del pie de tabla en negrita */
                 </tr>
                 @endforeach
                
-                <tr>
-                    <td class="">Total</td>
-                    <td class="">${{ $totalfinal }} </td>
-                </tr>
+            
                
             </tbody>
         </table>
 
+       <div class="row">
+        <div class="col-5">
+            <table class="vintage-table" >
+                <tr>
+                    <td >Total</td>
+                    <td >${{ $totalfinal }} </td>
+                </tr>
+               </table>
+        </div>
+       </div>
+
         <br>
        
         <div class="text-center">
-            <a type="button" id="cambiarEstadosButton" class="btn btn-warning" onclick="mostrarAlerta()">Finalizar Ventas en Evento</a>
+            <a type="button" id="cambiarEstadosButton" class="btn btn-warning" onclick="mostrarAlerta()">Cierre Diario</a>
             <a href="#" onclick="window.print()" class="btn btn-primary btn-sm">Guardar Informe</a>
         </div>
         
@@ -207,7 +203,14 @@ t: bold; /* Texto del pie de tabla en negrita */
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
 <script>
+    $(document).ready(function() {  
+        $('#miTabla').DataTable({
+            paging: true,  // Habilita la paginación
+            pageLength: 10, // Define la cantidad de filas por página
+        });
+    });
     function mostrarAlerta() {
 
         Swal.fire({

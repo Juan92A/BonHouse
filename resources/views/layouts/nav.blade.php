@@ -207,7 +207,7 @@
 
 
                             </li>
-                            <li><a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Visualizar eventos</a>
+                            <li><a class="nav-link" href="/verEventos"><i class="fas fa-calendar-alt"></i> Visualizar eventos</a>
                             </li>
                         </ul>
                     </li>
