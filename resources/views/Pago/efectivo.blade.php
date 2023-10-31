@@ -193,7 +193,7 @@
                         </div>
                         <div class="mb-3 col-md-4">
                             <label for="descuento" class="form-label">Porcentaje de descuento:</label>
-                            <input type="number" class="form-control" id="descuento"  pattern="^[1-9]\d*$" min="0" max="100"   name="porcentaje_descuento" required >
+                            <input type="number" class="form-control" id="descuento"  pattern="^[1-9]\d*$" min="0" max="100"   name="porcentaje_descuento"  >
                         </div>
                     
                       
@@ -201,7 +201,7 @@
                     <div class="row">
                             <div class="mb-3 col-md-4">
                             <label for="email" class="form-label">Correo electrónico:</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com" required>
                         </div>
 
                         <div class="mb-3 col-md-4">

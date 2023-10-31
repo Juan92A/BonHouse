@@ -113,6 +113,8 @@ class Pedido extends Model
             }
     
             $resultados = $query->get();
+
+        
           
             return $resultados;
         } catch (\Exception $e) {

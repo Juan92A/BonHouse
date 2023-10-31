@@ -167,9 +167,28 @@ namespace App\Http\Controllers;
             
                 $eventoModel = new evento();
                 $eventos = $eventoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
+                
 
                 return view('Usuario.evento', ['pedidos' => $eventos]);
             }
+        }
+
+
+        public function verEventos(Request $request)
+        {
+
+            $id_usuario = auth()->user()->id;
+            $fecha = $request->input('fecha_pedido', date('Y-m-d'));
+            $id_estado = $request->input('id_estado', '');
+
+            
+        
+            $eventoModel = new evento();
+            $eventos = $eventoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
+            
+
+            return view('Usuario.evento', ['pedidos' => $eventos]);
+
         }
 
 

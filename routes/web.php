@@ -169,6 +169,12 @@ Route::post('/carrito/eliminarProducto', [EventoController::class, 'eliminarProd
 Route::post('/pago/pagarEventos', [PagoController::class, 'pagarEvento'])->name('pago.evento');
 Route::get('/pedido/procesarEvento', [PedidoController::class, 'procesarPedidoEvento'])->name('pedido.procesarEvento');
 
+Route::get('/verEventos', [PedidoController::class, 'verEventos'])->name('pedido.verEventos');
+
+
+
+
+
 Route::post('/detalle-evento',  [AdminController::class, 'detalleEvento'])->name('detalle.evento');
 
 

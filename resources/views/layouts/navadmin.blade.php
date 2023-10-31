@@ -61,9 +61,9 @@
                         <div class="collapse navbar-collapse" id="navbarScroll">
                             <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    <a class="nav-link dropdown-toggle" style="margin-left: 125px" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-regular fa-user"></i> <span>{{ auth()->user()->name }}</span>
+                                        <i class="fa-regular fa-user ml-5"></i> <span>{{ auth()->user()->name }}</span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li class="dropdown-item">
@@ -89,11 +89,11 @@
                         </div>
 
                         <li >
-                            <a class="nav-link dropdown-toggle" href="#"  role="button"
+                            {{-- <a class="nav-link dropdown-toggle" href="#"  role="button"
                             data-bs-toggle="dropdown" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
                                 <i class="fas fa-clipboard-list"></i> Atender Pedidos
                             </a>
-                            
+                             --}}
                             <form id="pedido-form" action="{{ route('admin.pedidos') }}" method="POST" style="display: none;">
                                 @csrf
                                 <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido">
