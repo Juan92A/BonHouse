@@ -79,7 +79,8 @@
             title: 'Se ha agregado al carrito',
             text: 'El producto seleccionado se ha agregado al carrito',
             icon: 'success',
-            showConfirmButton: false
+            showConfirmButton: false,
+            timer: 3000
         });
 
         // Opcionalmente, puedes agregar un temporizador para cerrar automáticamente la alerta
