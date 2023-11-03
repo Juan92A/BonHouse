@@ -19,8 +19,11 @@ namespace App\Http\Controllers;
         {
             // Definimos nuestro carrito
             $carrito = $request->session()->get('carrito', []);
-
-            // Crear un nuevo Pedido
+          
+            if (empty($carrito)) {
+                return redirect()->route('admin.pedidos')->withMethod('POST');
+            } else {
+              // Crear un nuevo Pedido
             $pedido = new Pedido();
             $pedido->total_pagar = $request->input('total_pagar');
             $pedido->fecha_pedido = now();
@@ -59,64 +62,68 @@ namespace App\Http\Controllers;
                 return view('Admin.Pedidos', ['pedidos' => $pedidos]);
 
             }
+            }
+           
         }
 
 
-        public function procesarPedidoT(Request $request)
-        {
-            // Definimos nuestro carrito
-            $carrito = $request->session()->get('carrito', []);
+        // public function procesarPedidoT(Request $request)
+        // {
+        //     // Definimos nuestro carrito
+        //     $carrito = $request->session()->get('carrito', []);
 
             
 
-            // Crear un nuevo Pedido
-            $pedido = new Pedido();
-            $pedido->total_pagar = $request->input('total_pagar');
-            $pedido->fecha_pedido = now();
-            $pedido->id_usuario = auth()->user()->id;
-            $pedido->id_estado_pedido = $request->input('id_estado_pedido');
-            $pedido->ubicacion = $request->input('direccion_envio');
-            $pedido->save();
+        //     // Crear un nuevo Pedido
+        //     $pedido = new Pedido();
+        //     $pedido->total_pagar = $request->input('total_pagar');
+        //     $pedido->fecha_pedido = now();
+        //     $pedido->id_usuario = auth()->user()->id;
+        //     $pedido->id_estado_pedido = $request->input('id_estado_pedido');
+        //     $pedido->ubicacion = $request->input('direccion_envio');
+        //     $pedido->save();
 
-            // Crear los detalles de pedido para cada producto en el carrito
-            foreach ($carrito as $item) {
-                $detallePedido = new DetallePedido();
-                $detallePedido->id_pedido = $pedido->id;
-                $detallePedido->id_producto = $item['producto']->id_producto;
-                $detallePedido->cantidad = $item['cantidad']; // Asignar la cantidad del producto del carrito
+        //     // Crear los detalles de pedido para cada producto en el carrito
+        //     foreach ($carrito as $item) {
+        //         $detallePedido = new DetallePedido();
+        //         $detallePedido->id_pedido = $pedido->id;
+        //         $detallePedido->id_producto = $item['producto']->id_producto;
+        //         $detallePedido->cantidad = $item['cantidad']; // Asignar la cantidad del producto del carrito
 
-                $detallePedido->save(); // Guardar el detalle de pedido en la base de datos
-            }
+        //         $detallePedido->save(); // Guardar el detalle de pedido en la base de datos
+        //     }
 
-            // Vaciar el carrito
-            $request->session()->forget('carrito');
+        //     // Vaciar el carrito
+        //     $request->session()->forget('carrito');
 
-            // Redirigir y mostrar mensajes según el resultado
-            if ($pedido->id === null) {
-                $request->session()->flash('error_pedido', 'No se pudo procesar el pedido, por favor inténtelo de nuevo.');
-                return redirect()->route('pago.efectivo');
-            } else {
-                $request->session()->flash('success_pedido', '¡El pedido se ha creado exitosamente!');
-                $id_usuario = auth()->user()->id;
-                $fecha = $request->input('fecha_pedido', date('Y-m-d'));
-                $id_estado = $request->input('id_estado', '');
+        //     // Redirigir y mostrar mensajes según el resultado
+        //     if ($pedido->id === null) {
+        //         $request->session()->flash('error_pedido', 'No se pudo procesar el pedido, por favor inténtelo de nuevo.');
+        //         return redirect()->route('pago.efectivo');
+        //     } else {
+        //         $request->session()->flash('success_pedido', '¡El pedido se ha creado exitosamente!');
+        //         $id_usuario = auth()->user()->id;
+        //         $fecha = $request->input('fecha_pedido', date('Y-m-d'));
+        //         $id_estado = $request->input('id_estado', '');
 
                 
             
-                $pedidoModel = new Pedido();
-                $pedidos = $pedidoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
+        //         $pedidoModel = new Pedido();
+        //         $pedidos = $pedidoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
             
 
-                return view('Usuario.Pedido', ['pedidos' => $pedidos]);
-            }
-        }
+        //         return view('Usuario.Pedido', ['pedidos' => $pedidos]);
+        //     }
+        // }
 
         public function procesarPedidoEvento(Request $request)
         {
             
             $carrito = $request->session()->get('carritoEvento', []);
             
-           
+            if (empty($carrito)) {
+                return redirect()->route('pedido.verEventos');
+            } else {
             // Itera sobre los elementos del carrito
           
             // Actualiza el carrito en la sesión
@@ -166,11 +173,12 @@ namespace App\Http\Controllers;
                 
             
                 $eventoModel = new evento();
-                $eventos = $eventoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
+                $eventos = $eventoModel->obtenerPedidosPorUsuario($fecha, $id_estado);
                 
 
                 return view('Usuario.evento', ['pedidos' => $eventos]);
             }
+         }
         }
 
 
@@ -184,7 +192,7 @@ namespace App\Http\Controllers;
             
         
             $eventoModel = new evento();
-            $eventos = $eventoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
+            $eventos = $eventoModel->obtenerPedidosPorUsuario($fecha, $id_estado);
             
 
             return view('Usuario.evento', ['pedidos' => $eventos]);

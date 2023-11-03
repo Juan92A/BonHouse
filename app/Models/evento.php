@@ -60,7 +60,6 @@ class Evento extends Model
             }
 
             $query = DB::table('eventos')
-                ->join('users', 'eventos.id_usuario', '=', 'users.id')
                 ->join('estado_pedidos', 'eventos.id_estado_pedido', '=', 'estado_pedidos.id_estado_pedido')
                 ->where('eventos.fecha_pedido', $fecha);
 
@@ -95,7 +94,7 @@ class Evento extends Model
 
             $pedido = DB::table('eventos')
                 ->join('users', 'eventos.id_usuario', '=', 'users.id')
-                ->join('estado_pedidos', 'eventos.id_estado_pedido', '=', 'estado_pedidos.id_estado_pedido')
+                ->join('estado_eventos', 'eventos.id_estado_pedido', '=', 'estado_eventos.id_estado_evento')
                 ->where('eventos.id_pedido', $idPedido)
                 ->first();
 
@@ -108,14 +107,12 @@ class Evento extends Model
         }
     }
 
-    public function obtenerPedidosPorUsuario($id_usuario, $fecha = null, $estado = null)
+    public function obtenerPedidosPorUsuario( $fecha = null, $estado = null)
     {
         try {
             $query = DB::table('eventos AS p')
-                ->select('p.*')
                 ->join('users AS u', 'u.id', '=', 'p.id_usuario')
-                ->join('estado_pedidos AS ep', 'ep.id_estado_pedido', '=', 'p.id_estado_pedido')
-                ->where('p.id_usuario', $id_usuario);
+                ->join('estado_eventos  AS ep', 'ep.id_estado_evento', '=', 'p.id_estado_pedido');
     
             if ($fecha !== null && $estado !== null && $fecha !== "" && $estado !== "") {
                 $query->where('p.fecha_pedido', $fecha)
@@ -129,8 +126,6 @@ class Evento extends Model
             $resultados = $query->get();
 
             
-
-
           
             return $resultados;
         } catch (\Exception $e) {

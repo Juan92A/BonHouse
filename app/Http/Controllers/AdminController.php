@@ -161,6 +161,7 @@ namespace App\Http\Controllers;
             return redirect()->route('categorias.editar');
             // Ajusta la ruta según tu estructura
         }
+        
         public function actualizarcategoria(Request $request)
         {
             if ($request->isMethod('post')) {

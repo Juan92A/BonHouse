@@ -81,7 +81,7 @@
             icon: 'success',
             showConfirmButton: false,
             timer: 3000
-        });
+        }); 
 
         // Opcionalmente, puedes agregar un temporizador para cerrar automáticamente la alerta
         setTimeout(function() {

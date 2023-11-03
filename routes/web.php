@@ -89,11 +89,11 @@ Route::post('/pago/pagar', 'CarritoController@procesarPago')->name('pago.pagar')
 Route::post('/carrito/eliminar-producto', [CarritoController::class, 'eliminarProducto'])->name('carrito.eliminarProducto');
 
 
-Route::post('/pedido/procesar', [PedidoController::class, 'procesarPedido'])->name('pago.efectivo');
+// Route::post('/pedido/procesarPago', [PedidoController::class, 'procesarPedido'])->name('pago.efectivo');
 
 Route::post('/pago/pagar', [PagoController::class, 'pagar'])->name('pago.pagar');
 
-Route::post('/pedido/procesar', [PedidoController::class, 'procesarPedido'])->name('pedido.procesarPedido');
+// Route::post('/pedido/procesar', [PedidoController::class, 'procesarPedido'])->name('pedido.procesarPedido');
 
 Route::get('/pedido/procesarPedido', [PedidoController::class, 'procesarPedido'])->name('pedido.procesarPedido');
 
@@ -124,9 +124,9 @@ Route::post('/categorias/editar/', [AdminController::class, 'actualizarcategoria
 Route::get('/users', [AdminController::class, 'listUsers'])->name('users.list');
 Route::put('/user/update-role/{user}', [AdminController::class, 'updateRole'])->name('user.updateRole');
 
-Route::post('/pedido/procesar', [PedidoController::class, 'procesarPedidoT'])->name('pago.index');
+// Route::post('/pedido/procesar', [PedidoController::class, 'procesarPedidoT'])->name('pago.index');
 
-Route::post('/pedido/procesarPedido', [PedidoController::class, 'procesarPedidoT'])->name('pedido.procesarPedidos');
+// Route::post('/pedido/procesarPedido', [PedidoController::class, 'procesarPedidoT'])->name('pedido.procesarPedidos');
 
 
 Route::post('/detalle-pedido',  [AdminController::class, 'detallePedido'])->name('detalle.pedido');
@@ -143,7 +143,9 @@ Route::get('/editar-producto', [AdminController::class, 'editarProducto'])->name
 
 Route::post('/actualizarproducto', [AdminController::class, 'actualizarproducto'])->name('actualizar.producto');
 
+////se duplica ruta en get para evitar reconstruccion del pedido
 Route::post('/Admin/Pedido', [AdminController::class, 'pedidosA'])->name('admin.pedidos');
+Route::get('/Admin/Pedido', [AdminController::class, 'pedidosA'])->name('admin.pedidos');
 
 Route::post('/Admin/Pedidos', [AdminController::class, 'cambiarEstado'])->name('admin.cambiarEstado');
 
@@ -171,7 +173,10 @@ Route::get('/pedido/procesarEvento', [PedidoController::class, 'procesarPedidoEv
 
 Route::get('/verEventos', [PedidoController::class, 'verEventos'])->name('pedido.verEventos');
 
+Route::post('/verEventos', [PedidoController::class, 'verEventos'])->name('pedido.verEventos');
 
+
+Route::post('/Eventos/CambiarEstado', [EventoController::class, 'cambiarEstado'])->name('evento.cambiarEstado');
 
 
 

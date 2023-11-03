@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Producto; // Asegúrate de tener el namespace correcto para el modelo Producto
 use App\Models\Categoria; 
-
+use App\Models\Evento; 
 
 class EventoController extends Controller
 {
@@ -101,6 +101,29 @@ class EventoController extends Controller
 
         // Redirigir al carrito
         return redirect()->route('evento.carrito');
+    }
+
+
+    public function cambiarEstado(Request $request)
+    {
+     
+        if ($request->isMethod('post')) {
+            $id_pedido = $request->input('id_pedido');
+            $id_estado = $request->input('id_estado2');
+            
+            $pedidoModel = new evento();
+            $pedidoModel->actualizarEstado($id_pedido, $id_estado);
+            
+            $fechaActual = now()->format('Y-m-d');
+            $fecha = $request->input('fecha_pedido', $fechaActual);
+            $idEstado = $request->input('id_estado');
+
+            $eventoModel = new evento();
+            $eventos = $eventoModel->obtenerPedidosPorUsuario($fecha, $id_estado);
+            
+            return view('Usuario.evento', ['pedidos' => $eventos]);
+            //return redirect()->route('pedido.verEventos');
+        }
     }
 
     

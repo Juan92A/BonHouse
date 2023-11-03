@@ -248,10 +248,21 @@
                     event.preventDefault(); // Evita que se envíe el formulario
                 }
             });
-
+           
                     ////////Actualizacion en inputs
             var inputs = document.querySelectorAll('.cantidad-input');
+
+            
+
             inputs.forEach(function(input) {
+            
+            if(input.value>0){
+       
+            var totalPagar = calcularTotalPagar();
+            document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);                        
+                        document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
+            }
+
             input.addEventListener('change', function() {
             var row = this.closest('tr');
             var cantidadInput = this;
@@ -272,15 +283,16 @@
                 // precioTotalElements.forEach(function(element) {
                 //       total += parseFloat(element.textContent.replace('$', ''));
             //});
+
             @if($tipoventa == 1)
             var totalDescuento = calcularDescuento();
             descuentoRow.textContent = "-$" + totalDescuento.toFixed(2);
             document.querySelector('input[name="descuento"]').value = totalDescuento.toFixed(2);
+           @endif 
 
-           @endif      
             var subtotal = calcularSubTotal();
-                        var totalPagar = calcularTotalPagar();
-                        @if($tipoventa == 1)
+            var totalPagar = calcularTotalPagar();
+                 @if($tipoventa == 1)
                         document.getElementById('subtotal-row').textContent = "$" + subtotal.toFixed(2);
                         document.querySelector('input[name="sub_total"]').value = subtotal.toFixed(2);               
                 @endif
@@ -288,6 +300,7 @@
                         document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
                 });
             });
+
 
             @if($tipoventa == 1)
                  var porcentaje = document.getElementById('descuento');
