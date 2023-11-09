@@ -66,7 +66,7 @@
         .vintage-table tfoot td {
             font-weight: bold; /* Texto del pie de tabla en negrita */
         }
-        
+
         .vintage-text {
             background-color: #f5e8c0; /* Fondo desgastado */
             font-family: 'Courier New', monospace; /* Fuente de estilo retro */
@@ -94,13 +94,13 @@
             @php
             session()->forget(['error_pedido', 'success_pedido']);
             @endphp
-            @if($tipoventa == 1)    
+            @if($tipoventa == 1)
             <form id="formulario_pedido" action="{{ route('pedido.procesarEvento') }}">
             @else
-        
+
             <form id="formulario_pedido" action="{{ route('pedido.procesarPedido') }}">
             @endif
-        
+
             <div class="card">
                 <div class="position-relative">
                     <img src="{{ asset('imgC/baner2.jpg') }}" alt="Imagen de encabezado" class="card-img-top w-100" style="max-height: 180px;">
@@ -115,6 +115,49 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    @if($tipoventa == 1)
+                    <h1 class="vintage-text">Programar un Evento</h1>
+                @endif
+                    <div class="mb-3">
+                        <label for="nombre_cliente" class="form-label">Nombre del cliente:</label>
+                        <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" required>
+                    </div>
+
+                    @if($tipoventa == 1)
+                    <div class="row">
+                        <div class="mb-3 col-md-4">
+                            <label for="cantidad_personas" class="form-label">Cantidad de personas:</label>
+                            <input type="number" class="form-control" id="cantidad_personas"  pattern="^[1-9]\d*$" min="1" required   name="cantidad_personas" required  oninput="this.setCustomValidity('')">
+                        </div>
+                        <div class="mb-3 col-md-4">
+                            <label for="descuento" class="form-label">Porcentaje de descuento:</label>
+                            <input type="number" class="form-control" id="descuento"  pattern="^[1-9]\d*$" min="0" max="100"   name="porcentaje_descuento"  >
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                            <div class="mb-3 col-md-4">
+                            <label for="email" class="form-label">Correo electrónico:</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com" required>
+                        </div>
+
+                        <div class="mb-3 col-md-4">
+                        <label for="telefono" class="form-label">Teléfono:</label>
+                        <input type="tel" class="form-control" id="telefono" name="telefono" required pattern="\d{4}-\d{4}" title="Ingresa el teléfono en el formato 0000-0000">
+                        </div>
+
+                        <div class="mb-3 col-md-4">
+                            <label for="fecha_evento" class="form-label">Fecha del evento:</label>
+                            <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" required>
+                        </div>
+                    </div>
+
+
+                    @endif
+
+
+
                     <!-- Contenido de la tabla vintage -->
                     <div class="d-flex flex-row justify-content-between align-items-start">
                         <div class="flex-fill mr-3">
@@ -134,15 +177,15 @@
                                         $subbTotal = 0;
 
                                         @endphp
-                                
+
                                         @foreach ($carrito as $item)
                                         <tr  id="{{ $item['producto']->id_producto}}">
-                                            
+
                                             <td>{{ $item['producto']->nombre }}</td>
                                             <td>
                                             <input type="number" name="cantidad[{{ $item['producto']->id_producto }}]" class="cantidad-input" min="1" data-product-id="{{ $item['producto']->id_producto }}" value="{{ $item['cantidad'] }}">
                                             </td>
-                                    
+
                                             <td class="precioU">${{ number_format($item['producto']->precio, 2) }}</td>
                                             <td>${{ number_format($item['producto']->precio * $item['cantidad'], 2) }}</td>
                                         </tr>
@@ -161,7 +204,7 @@
                                     <tr>
                                         <td colspan="3" class="text-right font-weight-bold">Descuento:</td>
                                         <td class="font-weight-bold" id="descuento-row">-$0.00</td>
-                                        <input hidden name="descuento" value="$0.00">   
+                                        <input hidden name="descuento" value="$0.00">
                                     </tr>
                                     @endif
                                     <tr>
@@ -177,70 +220,31 @@
                 </div>
 
                 <div class="flex-fill col-md-12 mt-4 p-3">
-                @if($tipoventa == 1)
-                    <h1 class="vintage-text">Programar un Evento</h1>
-                @endif
-                    <div class="mb-3">
-                        <label for="nombre_cliente" class="form-label">Nombre del cliente:</label>
-                        <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente" required>
-                    </div>
-                
-                    @if($tipoventa == 1)
-                    <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label for="cantidad_personas" class="form-label">Cantidad de personas:</label>
-                            <input type="number" class="form-control" id="cantidad_personas"  pattern="^[1-9]\d*$" min="1" required   name="cantidad_personas" required  oninput="this.setCustomValidity('')">
-                        </div>
-                        <div class="mb-3 col-md-4">
-                            <label for="descuento" class="form-label">Porcentaje de descuento:</label>
-                            <input type="number" class="form-control" id="descuento"  pattern="^[1-9]\d*$" min="0" max="100"   name="porcentaje_descuento"  >
-                        </div>
-                    
-                      
-                    </div>
-                    <div class="row">
-                            <div class="mb-3 col-md-4">
-                            <label for="email" class="form-label">Correo electrónico:</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com" required>
-                        </div>
 
-                        <div class="mb-3 col-md-4">
-                        <label for="telefono" class="form-label">Teléfono:</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono" required pattern="\d{4}-\d{4}" title="Ingresa el teléfono en el formato 0000-0000">
-                        </div>
 
-                        <div class="mb-3 col-md-4">
-                            <label for="fecha_evento" class="form-label">Fecha del evento:</label>
-                            <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" required>
-                        </div>
-                    </div>
-                  
-                
-                    @endif
-                
                     <div class="text-center">
                         <button type="submit" class="btn btn-success btn-vintage">Guardar</button>
                         <input type="hidden" name="id_estado_pedido" value="1">
                     </div>
                 </div>
-                
+
                     </form>
                 </div>
             </div>
             </div>
-            
-        
-            
-        
-                
+
+
+
+
+
 
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('formulario_pedido').addEventListener('submit', function(event) {
                 var cantidadPersonas = document.getElementById('cantidad_personas').value;
-               
-                
+
+
 
 
                 if (cantidadPersonas < 1) {
@@ -248,18 +252,18 @@
                     event.preventDefault(); // Evita que se envíe el formulario
                 }
             });
-           
+
                     ////////Actualizacion en inputs
             var inputs = document.querySelectorAll('.cantidad-input');
 
-            
+
 
             inputs.forEach(function(input) {
-            
+
             if(input.value>0){
-       
+
             var totalPagar = calcularTotalPagar();
-            document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);                        
+            document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);
                         document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
             }
 
@@ -288,15 +292,15 @@
             var totalDescuento = calcularDescuento();
             descuentoRow.textContent = "-$" + totalDescuento.toFixed(2);
             document.querySelector('input[name="descuento"]').value = totalDescuento.toFixed(2);
-           @endif 
+           @endif
 
             var subtotal = calcularSubTotal();
             var totalPagar = calcularTotalPagar();
                  @if($tipoventa == 1)
                         document.getElementById('subtotal-row').textContent = "$" + subtotal.toFixed(2);
-                        document.querySelector('input[name="sub_total"]').value = subtotal.toFixed(2);               
+                        document.querySelector('input[name="sub_total"]').value = subtotal.toFixed(2);
                 @endif
-                        document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);                        
+                        document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);
                         document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
                 });
             });
@@ -315,7 +319,7 @@
 
                     }else{
                         var descuentoRow = document.getElementById('descuento-row');
-                    
+
                     // Calcular el descuento y actualizar la fila de "Descuento"
                     var totalDescuento = calcularDescuento();
                     descuentoRow.textContent = "-$" + totalDescuento.toFixed(2);
@@ -339,7 +343,7 @@
                         var descuentoRow = document.getElementById('descuento-row');
                         cantidades.forEach(function(input) {
                             input.value = cantidadPersonas;
-                        });  
+                        });
 
                         if (cantidadPersonas < 1) {
                                 alert('La cantidad de personas debe ser mayor a 0.');
@@ -348,9 +352,9 @@
                                     input.value = 0;
                                 });
                                 event.preventDefault(); // Evita que se envíe el formulario
-                            
-                        }else{  
-                            
+
+                        }else{
+
                             document.querySelectorAll('tbody tr').forEach(function(row) {
                             var precioUnitario = parseFloat(row.querySelector('.precioU').textContent.replace('$', '').trim());
                             var nuevoPrecioTotal = precioUnitario * cantidadPersonas;
@@ -369,13 +373,13 @@
                         document.querySelector('input[name="descuento"]').value = totalDescuento.toFixed(2);
 
                           @endif
-             
+
                         document.getElementById('subtotal-row').textContent = "$" + subtotal.toFixed(2);
                         document.getElementById('total-a-pagar-row').textContent = "$" + totalPagar.toFixed(2);
                         document.querySelector('input[name="total_pagar"]').value = totalPagar.toFixed(2);
                         document.querySelector('input[name="sub_total"]').value = subtotal.toFixed(2);
-                        }                    
-                        
+                        }
+
                     }
 
             function calcularSubTotal() {
@@ -386,9 +390,9 @@
                     var precioTotal = parseFloat(row.cells[3].innerText.replace('$', ''));
                     totalPagar += precioTotal;
                 });
-                totalPagar = totalPagar;    
+                totalPagar = totalPagar;
                 return totalPagar;
-            }  
+            }
              @if($tipoventa == 1)
 
             function  calcularDescuento  () {
@@ -401,7 +405,7 @@
                 });
                 totalDescuento = totalDescuento*(descuento/100);
                 return totalDescuento;
-            } 
+            }
             @endif
             function calcularTotalPagar() {
                 var totalPagar = 0;
@@ -414,9 +418,9 @@
                     totalPagar += precioTotal;
                 });
                 @if($tipoventa == 1)
-                totalPagar = totalPagar -calcularDescuento();   
+                totalPagar = totalPagar -calcularDescuento();
                 @endif
-                
+
                 return totalPagar;
             }
             @if($tipoventa == 1)
@@ -424,7 +428,7 @@
             document.getElementById('cantidad_personas').addEventListener('change', actualizarTabla);
             @endif
         });
-        
+
     </script>
 
 

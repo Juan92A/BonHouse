@@ -138,7 +138,7 @@ margin: 0%;
                         <p class="text-danger">{{ $pedido->Estado }}</p>
                     @elseif($pedido->Estado === 'Programado')
                         <p class="text-success">{{ $pedido->Estado }}</p>
-                        
+
                     @elseif($pedido->Estado === 'Finalizado')
                         <p class="text-success">{{ $pedido->Estado }}</p>
                     @else
@@ -146,7 +146,7 @@ margin: 0%;
                     @endif
 
                  {{--   @if($pedido->Estado === 'Programado')
-                        @php    
+                        @php
                             $totalfinal += $pedido->total_pagar;
                         @endphp
                     @endif--}}
@@ -170,10 +170,10 @@ margin: 0%;
                                     <select id="id_estado2" name="id_estado2" class="form-control">
                                     @if($pedido->Estado === 'Pendiente')
                                         <option value="1">Pendiente</option>
-                                        
+
                                     @endif
                                       <option value="2">Programado</option>
-                                        <option value="3">Cancelado</option>                                        
+                                        <option value="3">Cancelado</option>
                                         <option value="4">Finalizado</option>
                                     </select>
                                 </div>
@@ -188,6 +188,10 @@ margin: 0%;
                     @endforeach
                 </tbody>
             </table>
+
+            <div class="text-center" style="margin-bottom: 290px">
+                <a href="#" onclick="window.print()" class="btn btn-primary btn-sm">Guardar Informe de Eventos</a>
+            </div>
             @endif
         </div>
     </div>

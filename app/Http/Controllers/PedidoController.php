@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
     use App\Models\Producto;
-    use App\Models\pedido;    
+    use App\Models\pedido;
     use App\Models\evento;
     use App\Models\detallepedido;
     use App\Models\DetalleEvento;
     use Illuminate\Http\Request;
     use App\Http\Controllers\Controller;
     use Illuminate\Support\Facades\Session;
-    
+
 
     // Crear un nuevo Pedido
     class PedidoController extends Controller
@@ -19,7 +19,7 @@ namespace App\Http\Controllers;
         {
             // Definimos nuestro carrito
             $carrito = $request->session()->get('carrito', []);
-          
+
             if (empty($carrito)) {
                 return redirect()->route('admin.pedidos')->withMethod('POST');
             } else {
@@ -38,7 +38,7 @@ namespace App\Http\Controllers;
                 $detallePedido->id_pedido = $pedido->id;
                 $detallePedido->id_producto = $item['producto']->id_producto;
                 $detallePedido->cantidad = $request->input('cantidad')[$item['producto']->id_producto];; // Asignar la cantidad del producto del carrito
-                
+
                 $detallePedido->save(); // Guardar el detalle de pedido en la base de datos
             }
             // Vaciar el carrito
@@ -58,12 +58,12 @@ namespace App\Http\Controllers;
                 $pedido = new Pedido();
                 $pedidos = $pedido->listarPedidos($fecha, $idEstado);
 
-          
+
                 return view('Admin.Pedidos', ['pedidos' => $pedidos]);
 
             }
             }
-           
+
         }
 
 
@@ -72,7 +72,7 @@ namespace App\Http\Controllers;
         //     // Definimos nuestro carrito
         //     $carrito = $request->session()->get('carrito', []);
 
-            
+
 
         //     // Crear un nuevo Pedido
         //     $pedido = new Pedido();
@@ -106,11 +106,11 @@ namespace App\Http\Controllers;
         //         $fecha = $request->input('fecha_pedido', date('Y-m-d'));
         //         $id_estado = $request->input('id_estado', '');
 
-                
-            
+
+
         //         $pedidoModel = new Pedido();
         //         $pedidos = $pedidoModel->obtenerPedidosPorUsuario($id_usuario, $fecha, $id_estado);
-            
+
 
         //         return view('Usuario.Pedido', ['pedidos' => $pedidos]);
         //     }
@@ -118,14 +118,14 @@ namespace App\Http\Controllers;
 
         public function procesarPedidoEvento(Request $request)
         {
-            
+
             $carrito = $request->session()->get('carritoEvento', []);
-            
+
             if (empty($carrito)) {
                 return redirect()->route('pedido.verEventos');
             } else {
             // Itera sobre los elementos del carrito
-          
+
             // Actualiza el carrito en la sesión
             $request->session()->put('carritoEvento', $carrito);
             // Crear un nuevo Pedido
@@ -140,13 +140,13 @@ namespace App\Http\Controllers;
             $evento->nombre_cliente = $request->input('nombre_cliente');
             $evento->cantidad_personas = $request->input('cantidad_personas');
             $evento->fecha_evento = $request->input('fecha_evento');
-            $evento->telefono = $request->input('telefono');            
+            $evento->telefono = $request->input('telefono');
             $evento->email = $request->input('email');
 
             $evento->save();
-           
-           
-       
+
+
+
                 // Crear los detalles de pedido para cada producto en el carrito
             foreach ($carrito as $item) {
                 $DetalleEvento = new DetalleEvento();
@@ -170,11 +170,11 @@ namespace App\Http\Controllers;
                 $fecha = $request->input('fecha_pedido', date('Y-m-d'));
                 $id_estado = $request->input('id_estado', '');
 
-                
-            
+
+
                 $eventoModel = new evento();
                 $eventos = $eventoModel->obtenerPedidosPorUsuario($fecha, $id_estado);
-                
+
 
                 return view('Usuario.evento', ['pedidos' => $eventos]);
             }
@@ -189,20 +189,20 @@ namespace App\Http\Controllers;
             $fecha = $request->input('fecha_pedido', date('Y-m-d'));
             $id_estado = $request->input('id_estado', '');
 
-            
-        
+
+
             $eventoModel = new evento();
             $eventos = $eventoModel->obtenerPedidosPorUsuario($fecha, $id_estado);
-            
+
 
             return view('Usuario.evento', ['pedidos' => $eventos]);
 
         }
 
 
-        
+
     }
-    
+
 
 
 

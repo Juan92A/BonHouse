@@ -87,7 +87,7 @@ margin:0%
 </style>
 
     <div class="container p-5">
-        <div class="card ">
+        <div class="card " style="margin-bottom: 250px">
             <div class="card-body mt-5 mb-5">
                 {{-- @if (empty($carrito))
                     <div class="alert alert-warning" role="alert">
@@ -168,7 +168,7 @@ margin:0%
                 {{-- @endif --}}
             </div>
         </div>
-        
+
     </div>
 </div>
 

@@ -17,10 +17,10 @@
             <div class="offcanvas-body justify-content-between">
                 <ul class="navbar-nav align-middle">
 
-     
-                <li class="nav-item"><a class="nav-link" href="{{route('users.list')}}">Administrar usuarios</a></li> 
 
-               
+                <li class="nav-item"><a class="nav-link" href="{{route('users.list')}}">Administrar usuarios</a></li>
+
+
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="promocionesDropdown" role="button"
@@ -40,8 +40,8 @@
                             Productos
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="productosDropdown">
-                         <li><a class="dropdown-item" href="{{ route('admin.productos') }}">Ver productos</a></li> 
-                           <li><a class="dropdown-item" href="{{ route('productos.add') }}">Agregar producto</a></li> 
+                         <li><a class="dropdown-item" href="{{ route('admin.productos') }}">Ver productos</a></li>
+                           <li><a class="dropdown-item" href="{{ route('productos.add') }}">Agregar producto</a></li>
                             {{-- <li><a class="dropdown-item" href="{{ route('admin.productoE') }}">Editar producto</a></li> --}}
                         </ul>
                     </li>
@@ -53,7 +53,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="categoriasDropdown">
                              <li><a class="dropdown-item" href="{{ route('categorias.create') }}">Agregar categoria</a></li>
-                            <li><a class="dropdown-item" href="{{ route('categorias.editar') }}">Editar categoria</a></li> 
+                            <li><a class="dropdown-item" href="{{ route('categorias.editar') }}">Editar categoria</a></li>
                         </ul>
                     </li>
 
@@ -61,7 +61,7 @@
                         <div class="collapse navbar-collapse" id="navbarScroll">
                             <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" style="margin-left: 125px" href="#" role="button"
+                                    <a class="nav-link dropdown-toggle" style="margin-left: 395px" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-regular fa-user ml-5"></i> <span>{{ auth()->user()->name }}</span>
                                     </a>
@@ -71,7 +71,7 @@
                                                 <i class="fas fa-user"></i> Mi perfil
                                             </a>
                                         </li>
-                                        
+
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
@@ -104,8 +104,8 @@
                                     <option value="3">Cancelado</option>
                                 </select>
                             </form>
-                        
-                        </li> 
+
+                        </li>
                     </li>
                 </ul>
             </div>

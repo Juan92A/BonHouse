@@ -284,7 +284,7 @@
                                             <li class="dropdown-item">
 
 
-                                                <a href="#"
+                                                {{-- <a href="#"
                                                     onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
                                                     <i class="fas fa-clipboard-list"></i> {{ __('Mis pedidos') }}
                                                 </a>
@@ -300,7 +300,7 @@
                                                         <option value="2">Finalizado</option>
                                                         <option value="3">Cancelado</option>
                                                     </select>
-                                                </form>
+                                                </form> --}}
 
 
                                             </li>

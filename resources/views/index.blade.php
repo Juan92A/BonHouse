@@ -63,7 +63,7 @@
     margin: 0 auto; /* Centrar la imagen horizontalmente */
     border: 2px solid #8B4513; /* Añadir un borde con color marrón */
     padding: 5px; /* Espacio entre el borde y la imagen */
-    
+
 
 }
 
@@ -87,16 +87,16 @@
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
                     <div style="margin-bottom: 25%">
                         <div class="container mt-5">
-                            @if (Route::has('login'))  
+                            @if (Route::has('login'))
                                     @auth
-                                        <h1 class="titulo-promociones mb-4">Bienvenido {{ auth()->user()->name }}  a BonHouse</h1>
+                                        <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse, {{ auth()->user()->name }}</h1>
                                         <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                         @else
                                         <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
                                         <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                         @endauth
                                     @endif
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,16 +105,16 @@
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
                     <div style="margin-bottom: 25%">
                         <div class="container mt-5">
-                            @if (Route::has('login'))  
+                            @if (Route::has('login'))
                                 @auth
-                                    <h1 class="titulo-promociones mb-4">Bienvenido {{ auth()->user()->name }}  a BonHouse</h1>
+                                    <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse, {{ auth()->user()->name }}</h1>
                                     <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                     @else
                                     <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
                                     <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                     @endauth
                                 @endif
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,16 +123,16 @@
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
                     <div style="margin-bottom: 25%">
                         <div class="container mt-5">
-                            @if (Route::has('login'))  
+                            @if (Route::has('login'))
                                 @auth
-                                    <h1 class="titulo-promociones mb-4">Bienvenido {{ auth()->user()->name }}  a BonHouse</h1>
+                                    <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse, {{ auth()->user()->name }} </h1>
                                     <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                     @else
                                     <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
                                     <img src="{{ asset('imgC/logo1.jpeg') }}" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                 @endauth
                             @endif
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    
+
 
     @include('layouts.footer')
 </body>

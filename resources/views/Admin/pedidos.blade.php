@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div style="
+background:#e2d9c2;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+height:100%;
+margin:0%
+">
     <style>
         .card {
             transition: transform 0.3s, box-shadow 0.3s;
@@ -86,7 +93,7 @@
 
         .vintage-table tfoot td {
             font-weigh
-            
+
             .text-center {
     text-align: center;
 }
@@ -98,7 +105,8 @@ t: bold; /* Texto del pie de tabla en negrita */
         }
     </style>
 
-    <h1 class="vintage-text mt-5">Pedidos Realizados</h1>
+    <div class="container">
+        <h1 class="vintage-text mt-2">Pedidos Realizados</h1>
 
 
     <hr>
@@ -126,7 +134,7 @@ t: bold; /* Texto del pie de tabla en negrita */
                     <td>{{ $pedido->nombre_cliente }}</td>
                     <td>${{ $pedido->total_pagar }}</td>
                     <td>{{ $pedido->fecha_pedido }}</td>
-                     
+
                     <td>
 
                     @if($pedido->Estado === 'Cancelado')
@@ -138,7 +146,7 @@ t: bold; /* Texto del pie de tabla en negrita */
                     @endif
 
                     @if($pedido->Estado === 'Pagado')
-                        @php    
+                        @php
                             $totalfinal += $pedido->total_pagar;
                         @endphp
                     @endif
@@ -154,7 +162,7 @@ t: bold; /* Texto del pie de tabla en negrita */
                     @if($pedido->Estado === 'En Proceso')
                         <form method="post" action="{{ route('admin.cambiarEstado') }}">
                             @csrf
-                          
+
                                 <div class="form-group">
                                     <label for="id_estado2">Estado:</label>
                                     <select id="id_estado2" name="id_estado2" class="form-control">
@@ -163,18 +171,18 @@ t: bold; /* Texto del pie de tabla en negrita */
                                         <option value="3">Cancelado</option>
                                     </select>
                                 </div>
-                          
+
                             <input type="hidden" name="id_pedido" value="{{ $pedido->id_pedido }}">
                             <button type="submit" class="vintage-button">Cambiar estado</button>
-                           
+
                         </form>
                     @endif
                     </td>
                 </tr>
                 @endforeach
-               
-            
-               
+
+
+
             </tbody>
         </table>
 
@@ -190,22 +198,23 @@ t: bold; /* Texto del pie de tabla en negrita */
        </div>
 
         <br>
-       
-        <div class="text-center">
+
+        <div class="text-center" style="margin-bottom: 290px">
             <a type="button" id="cambiarEstadosButton" class="btn btn-warning" onclick="mostrarAlerta()">Cierre Diario</a>
             <a href="#" onclick="window.print()" class="btn btn-primary btn-sm">Guardar Informe</a>
         </div>
-        
-        
+
+
 
         <br>
-    </div> 
+    </div>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>
-    $(document).ready(function() {  
+    $(document).ready(function() {
         $('#miTabla').DataTable({
             paging: true,  // Habilita la paginación
             pageLength: 10, // Define la cantidad de filas por página
@@ -240,5 +249,5 @@ t: bold; /* Texto del pie de tabla en negrita */
 
 
 
-    
+
 @endsection
