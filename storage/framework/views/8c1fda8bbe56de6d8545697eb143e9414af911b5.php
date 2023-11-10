@@ -63,7 +63,7 @@
     margin: 0 auto; /* Centrar la imagen horizontalmente */
     border: 2px solid #8B4513; /* Añadir un borde con color marrón */
     padding: 5px; /* Espacio entre el borde y la imagen */
-    
+
 
 }
 
@@ -87,16 +87,16 @@
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
                     <div style="margin-bottom: 25%">
                         <div class="container mt-5">
-                            <?php if(Route::has('login')): ?>  
+                            <?php if(Route::has('login')): ?>
                                     <?php if(auth()->guard()->check()): ?>
-                                        <h1 class="titulo-promociones mb-4">Bienvenido <?php echo e(auth()->user()->name); ?>  a BonHouse</h1>
+                                        <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse, <?php echo e(auth()->user()->name); ?></h1>
                                         <img src="<?php echo e(asset('imgC/logo1.jpeg')); ?>" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                         <?php else: ?>
                                         <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
                                         <img src="<?php echo e(asset('imgC/logo1.jpeg')); ?>" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                         <?php endif; ?>
                                     <?php endif; ?>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,16 +105,16 @@
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
                     <div style="margin-bottom: 25%">
                         <div class="container mt-5">
-                            <?php if(Route::has('login')): ?>  
+                            <?php if(Route::has('login')): ?>
                                 <?php if(auth()->guard()->check()): ?>
-                                    <h1 class="titulo-promociones mb-4">Bienvenido <?php echo e(auth()->user()->name); ?>  a BonHouse</h1>
+                                    <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse, <?php echo e(auth()->user()->name); ?></h1>
                                     <img src="<?php echo e(asset('imgC/logo1.jpeg')); ?>" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                     <?php else: ?>
                                     <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
                                     <img src="<?php echo e(asset('imgC/logo1.jpeg')); ?>" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                     <?php endif; ?>
                                 <?php endif; ?>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,16 +123,16 @@
                 <div class="carousel-caption d-flex justify-content-center align-items-center">
                     <div style="margin-bottom: 25%">
                         <div class="container mt-5">
-                            <?php if(Route::has('login')): ?>  
+                            <?php if(Route::has('login')): ?>
                                 <?php if(auth()->guard()->check()): ?>
-                                    <h1 class="titulo-promociones mb-4">Bienvenido <?php echo e(auth()->user()->name); ?>  a BonHouse</h1>
+                                    <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse, <?php echo e(auth()->user()->name); ?> </h1>
                                     <img src="<?php echo e(asset('imgC/logo1.jpeg')); ?>" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                     <?php else: ?>
                                     <h1 class="titulo-promociones mb-4">Bienvenido a BonHouse</h1>
                                     <img src="<?php echo e(asset('imgC/logo1.jpeg')); ?>" class="d-block mx-auto img-logo " alt="Logo BonHouse" style="width: 96px">
                                 <?php endif; ?>
                             <?php endif; ?>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    
+
 
     <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 </body>
@@ -157,4 +157,5 @@
 <script>
 AOS.init();
 </script>
-<!-- FIN CONTENIDO --><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/index.blade.php ENDPATH**/ ?>
+<!-- FIN CONTENIDO -->
+<?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/index.blade.php ENDPATH**/ ?>

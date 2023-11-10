@@ -41,7 +41,7 @@
                         <div style="display: flex; align-items: center;">
                            
                             <div class="stars">
-                                <input type="number" name="cantidad" value="1" min="1" max="10">
+                                <input type="number" name="cantidad" value="1" min="1">
                             </div>
                        
                             

@@ -87,7 +87,7 @@ margin:0%
 </style>
 
     <div class="container p-5">
-        <div class="card ">
+        <div class="card " style="margin-bottom: 250px">
             <div class="card-body mt-5 mb-5">
                 
                     <div class="row">
@@ -164,7 +164,7 @@ margin:0%
                 
             </div>
         </div>
-        
+
     </div>
 </div>
 
@@ -193,4 +193,5 @@ margin:0%
     });
 </script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/evento/carrito.blade.php ENDPATH**/ ?>

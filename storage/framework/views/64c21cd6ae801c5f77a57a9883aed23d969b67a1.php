@@ -281,24 +281,7 @@
                                             <li class="dropdown-item">
 
 
-                                                <a href="#"
-                                                    onclick="event.preventDefault(); document.getElementById('pedido-form').submit();">
-                                                    <i class="fas fa-clipboard-list"></i> <?php echo e(__('Mis pedidos')); ?>
-
-                                                </a>
-
-                                                <form id="pedido-form" action="<?php echo e(route('usuario.pedidos')); ?>"
-                                                    method="POST" style="display: none;">
-                                                    <?php echo csrf_field(); ?>
-                                                    <input type="date" class="form-control" id="fecha_pedido"
-                                                        name="fecha_pedido">
-                                                    <select id="id_estado" name="id_estado" class="form-control">
-                                                        <option value="">Todos</option>
-                                                        <option value="1">En proceso</option>
-                                                        <option value="2">Finalizado</option>
-                                                        <option value="3">Cancelado</option>
-                                                    </select>
-                                                </form>
+                                                
 
 
                                             </li>

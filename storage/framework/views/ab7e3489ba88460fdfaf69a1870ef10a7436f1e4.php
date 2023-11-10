@@ -1,7 +1,14 @@
 
 
 <?php $__env->startSection('content'); ?>
-<div class="container">
+<div style="
+background:#e2d9c2;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+height:100%;
+margin:0%
+">
     <style>
         .card {
             transition: transform 0.3s, box-shadow 0.3s;
@@ -86,7 +93,7 @@
 
         .vintage-table tfoot td {
             font-weigh
-            
+
             .text-center {
     text-align: center;
 }
@@ -98,12 +105,13 @@ t: bold; /* Texto del pie de tabla en negrita */
         }
     </style>
 
-    <h1 class="vintage-text mt-5">Pedidos Realizados</h1>
+    <div class="container">
+        <h1 class="vintage-text mt-2">Pedidos Realizados</h1>
 
 
     <hr>
 
-    <div class="">
+    <div class="table-responsive">
         <table id="miTabla" class="vintage-table">
             <thead>
                 <tr>
@@ -126,7 +134,7 @@ t: bold; /* Texto del pie de tabla en negrita */
                     <td><?php echo e($pedido->nombre_cliente); ?></td>
                     <td>$<?php echo e($pedido->total_pagar); ?></td>
                     <td><?php echo e($pedido->fecha_pedido); ?></td>
-                     
+
                     <td>
 
                     <?php if($pedido->Estado === 'Cancelado'): ?>
@@ -138,7 +146,7 @@ t: bold; /* Texto del pie de tabla en negrita */
                     <?php endif; ?>
 
                     <?php if($pedido->Estado === 'Pagado'): ?>
-                        <?php    
+                        <?php
                             $totalfinal += $pedido->total_pagar;
                         ?>
                     <?php endif; ?>
@@ -154,7 +162,7 @@ t: bold; /* Texto del pie de tabla en negrita */
                     <?php if($pedido->Estado === 'En Proceso'): ?>
                         <form method="post" action="<?php echo e(route('admin.cambiarEstado')); ?>">
                             <?php echo csrf_field(); ?>
-                          
+
                                 <div class="form-group">
                                     <label for="id_estado2">Estado:</label>
                                     <select id="id_estado2" name="id_estado2" class="form-control">
@@ -163,18 +171,18 @@ t: bold; /* Texto del pie de tabla en negrita */
                                         <option value="3">Cancelado</option>
                                     </select>
                                 </div>
-                          
+
                             <input type="hidden" name="id_pedido" value="<?php echo e($pedido->id_pedido); ?>">
                             <button type="submit" class="vintage-button">Cambiar estado</button>
-                           
+
                         </form>
                     <?php endif; ?>
                     </td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-               
-            
-               
+
+
+
             </tbody>
         </table>
 
@@ -190,22 +198,23 @@ t: bold; /* Texto del pie de tabla en negrita */
        </div>
 
         <br>
-       
-        <div class="text-center">
+
+        <div class="text-center" style="margin-bottom: 290px">
             <a type="button" id="cambiarEstadosButton" class="btn btn-warning" onclick="mostrarAlerta()">Cierre Diario</a>
             <a href="#" onclick="window.print()" class="btn btn-primary btn-sm">Guardar Informe</a>
         </div>
-        
-        
+
+
 
         <br>
-    </div> 
+    </div>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>
-    $(document).ready(function() {  
+    $(document).ready(function() {
         $('#miTabla').DataTable({
             paging: true,  // Habilita la paginación
             pageLength: 10, // Define la cantidad de filas por página
@@ -240,6 +249,7 @@ t: bold; /* Texto del pie de tabla en negrita */
 
 
 
-    
+
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juanjo\Documents\MisArchivos\Gestion\Proyecto\BonHouse\resources\views/Admin/Pedidos.blade.php ENDPATH**/ ?>

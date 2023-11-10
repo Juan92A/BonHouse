@@ -110,11 +110,11 @@ margin: 0%;
         </div>
         </form> --}}
 
-        <div class="col-md-12">
+        <div class="col-md-12 table-responsive">
             @if(empty($pedidos))
             <p>No tienes pedidos activos en este momento</p>
             @else
-            <table id="miTabla" class="vintage-table table-striped table-bordered">
+            <table id="miTabla" class="vintage-table table-striped table-bordered  table-responsive">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -125,6 +125,7 @@ margin: 0%;
                         <th scope="col">Total</th>
                         <th scope="col">Ver</th>
                         <th scope="col">Modificar estado</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -184,6 +185,13 @@ margin: 0%;
                             </form>
                             @endif
                         </td>
+                        <td>
+                        @if($pedido->Estado === 'Cancelado' || $pedido->Estado === 'Finalizado')
+                         
+                                <button type="button" class="btn btn-danger eliminar-evento" data-id="{{ $pedido->id_pedido }}">Eliminar</button>
+                          
+                        @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -204,6 +212,7 @@ margin: 0%;
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 $(document).ready(function() {
@@ -211,6 +220,25 @@ $(document).ready(function() {
         paging: true, // Habilita la paginación
         pageLength: 10, // Define la cantidad de filas por página
     });
+
+    $('.eliminar-evento').click(function () {
+            var idEvento = $(this).data('id');
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: '¿Quieres eliminar este evento?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir a la ruta de eliminación del evento con el ID
+                    window.location.href = '{{ route('evento.eliminar', '') }}/' + idEvento;
+                }
+            });
+        });
 });
 </script>
 

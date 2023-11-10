@@ -164,6 +164,7 @@ Route::get('promociones/add', [AdminController::class, 'PromocionesAdd'])->name(
 
 Route::get('/eventos', [EventoController::class, 'verEvento'])->name('evento.carrito');
 Route::post('/evento/agregar-producto', [EventoController::class, 'agregarProducto'])->name('evento.agregarProducto');
+Route::get('/evento/eliminar/{id}',  [EventoController::class, 'eliminarEvento'])->name('evento.eliminar');
 
 Route::get('/productos/eventos', [FoodController::class, 'indexEvento'])->name('food.evento');
 Route::post('/carrito/eliminarProducto', [EventoController::class, 'eliminarProducto'])->name('evento.eliminarProducto');

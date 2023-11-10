@@ -111,7 +111,7 @@ t: bold; /* Texto del pie de tabla en negrita */
 
     <hr>
 
-    <div class="">
+    <div class="table-responsive">
         <table id="miTabla" class="vintage-table">
             <thead>
                 <tr>

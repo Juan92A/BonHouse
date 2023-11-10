@@ -126,6 +126,18 @@ class EventoController extends Controller
         }
     }
 
+ 
+    public function eliminarEvento($id)
+    {
+        $eventoModel = new Evento();
+        
+        // Llama al método del modelo para eliminar el evento
+        $eventoModel->eliminarEvento($id); $eventoModel = new evento();
+        $eventos = $eventoModel->obtenerPedidosPorUsuario();
+
+        return view('Usuario.evento', ['pedidos' => $eventos]);
+    }
+    
     
 }
 

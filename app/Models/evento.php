@@ -133,6 +133,16 @@ class Evento extends Model
             return [];
         }
     }
+ public function eliminarEvento($idEvento)
+{
+    try {
+        DB::table('eventos')
+            ->where('id_pedido', $idEvento)
+            ->delete();
+    } catch (\Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
     
 
     // Otros métodos para consultar, actualizar o eliminar pedidos si es necesario
