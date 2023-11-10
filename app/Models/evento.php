@@ -115,8 +115,7 @@ class Evento extends Model
                 ->join('estado_eventos  AS ep', 'ep.id_estado_evento', '=', 'p.id_estado_pedido');
     
             if ($fecha !== null && $estado !== null && $fecha !== "" && $estado !== "") {
-                $query->where('p.fecha_pedido', $fecha)
-                    ->where('p.id_estado_pedido', $estado);
+                $query->where('p.fecha_pedido', $fecha);
             } elseif ($fecha !== null && $fecha !== "") {
                 $query->where('p.fecha_pedido', $fecha);
             } elseif ($estado !== null && $estado !== "") {
